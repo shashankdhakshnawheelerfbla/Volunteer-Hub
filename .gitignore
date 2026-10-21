@@ -1,0 +1,8 @@
+# OneDrive or system configurations
+Thumbs.db
+desktop.ini
+.DS_Store
+
+# Code workspace data
+.vscode/
+*.log
