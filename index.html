@@ -1,0 +1,758 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#f5f7f2">
+<title>VolunteerHub | Make an Impact</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap');
+
+:root {
+  --bg:#f5f7f2;--surface:#fff;--ink:#1b2b22;--muted:#7a857d;
+  --line:#e7ebe4;--green:#256747;--dark:#194b34;
+  --light:#e8f2e8;--lime:#d9f078;--orange:#f5a66f;
+  --red:#b84c47;--shadow:0 5px 24px #203b2510;
+  --radius:17px;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:14px 'DM Sans',sans-serif}
+button,input,select,textarea{font:inherit}
+button{cursor:pointer}
+button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px solid #9bceaa;outline-offset:2px}
+.app{display:flex;min-height:100vh}
+.sidebar{width:235px;background:#fff;border-right:1px solid var(--line);padding:25px 15px;display:flex;flex-direction:column;flex-shrink:0}
+.brand{display:flex;align-items:center;gap:10px;padding:0 9px;margin-bottom:35px}
+.logo{width:40px;height:40px;border-radius:13px;background:var(--green);color:var(--lime);display:grid;place-items:center;font-size:23px}
+.brand strong{font:800 19px Manrope,sans-serif;letter-spacing:-1px}
+.brand small{display:block;font-size:10px;color:var(--muted);margin-top:2px}
+.nav-label{font-size:10px;font-weight:800;letter-spacing:1.5px;color:#a0aaa1;padding:0 12px;margin-bottom:10px}
+.nav{display:grid;gap:5px}
+.nav button{display:flex;align-items:center;gap:12px;border:0;background:transparent;color:#68766d;text-align:left;padding:12px;border-radius:11px;font-size:13px;font-weight:600}
+.nav button:hover{background:#f5f7f3}
+.nav button.active{background:var(--light);color:var(--dark)}
+.nav-icon{width:20px;text-align:center;font-size:17px}
+.side-bottom{margin-top:auto}
+.mini-impact{background:#f0f5ec;border-radius:14px;padding:16px;margin:22px 3px}
+.mini-impact .leaf{font-size:22px}
+.mini-impact strong{display:block;margin:8px 0 5px}
+.mini-impact p{font-size:11px;color:var(--muted);line-height:1.7;margin:0}
+.profile{display:flex;align-items:center;gap:10px;border-top:1px solid var(--line);padding:18px 6px 0}
+.avatar{width:37px;height:37px;border-radius:50%;background:#dce9d7;color:var(--green);display:grid;place-items:center;font-weight:800;flex-shrink:0}
+.profile strong{display:block;font-size:12px}
+.profile small{font-size:11px;color:var(--muted)}
+.main{flex:1;min-width:0}
+.topbar{height:73px;padding:0 34px;background:#ffffffc9;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;gap:12px}
+.crumb{color:var(--muted);font-size:12px}
+.crumb strong{color:var(--ink)}
+.top-actions{display:flex;align-items:center;gap:9px}
+.date-label{font-size:12px;color:var(--muted)}
+.mobile-brand{display:none}
+.content{max-width:1550px;margin:auto;padding:31px 34px 50px}
+.page{display:none}
+.page.active{display:block}
+.heading{display:flex;justify-content:space-between;align-items:flex-end;gap:18px;margin-bottom:24px}
+.eyebrow{font-size:10px;font-weight:800;letter-spacing:1.7px;text-transform:uppercase;color:var(--green)}
+h2{font:800 clamp(25px,3vw,34px) Manrope,sans-serif;letter-spacing:-1.5px;margin:8px 0}
+.heading p{color:var(--muted);margin:0;line-height:1.6}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:7px;padding:10px 14px;border-radius:10px;border:1px solid transparent;font-size:12px;font-weight:700;transition:.15s}
+.primary{background:var(--green);color:#fff}
+.primary:hover{background:var(--dark)}
+.secondary{background:#fff;border-color:var(--line);color:var(--ink)}
+.secondary:hover{background:#f5f8f3}
+.danger{background:#fff0ee;color:var(--red)}
+.small-btn{padding:7px 10px;font-size:11px}
+.stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-bottom:21px}
+.stat,.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow)}
+.stat{padding:19px}
+.stat-top{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.stat-label{font-size:12px;color:#68756d;font-weight:600}
+.stat-icon{width:35px;height:35px;border-radius:11px;display:grid;place-items:center;font-size:17px}
+.green{background:#e7f3e8;color:#286c48}
+.yellow{background:#fbf2dc;color:#9c7626}
+.purple{background:#f1eafb;color:#805ca8}
+.blue{background:#e9effc;color:#5270ac}
+.stat-number{font:800 29px Manrope,sans-serif;letter-spacing:-1px;margin:13px 0 5px}
+.stat-foot{font-size:11px;color:var(--muted)}
+.dashboard-grid{display:grid;grid-template-columns:1.35fr 1fr;gap:17px}
+.card{padding:21px;min-width:0}
+.card-heading{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:18px}
+.card-heading h3{font:800 15px Manrope,sans-serif;margin:0}
+.card-heading p{font-size:11px;color:var(--muted);margin:5px 0 0}
+.text-btn{border:0;background:transparent;color:var(--green);font-weight:800;font-size:11px}
+.opportunity-list{display:grid;gap:10px}
+.opportunity-row{display:flex;align-items:center;gap:11px;padding:12px;border:1px solid var(--line);border-radius:12px}
+.event-date{min-width:48px;text-align:center;padding:9px 4px;border-radius:10px;background:#eff5eb;color:var(--green)}
+.event-date strong{display:block;font-size:17px}
+.event-date small{font-size:9px;text-transform:uppercase;font-weight:800}
+.event-info{flex:1;min-width:0}
+.event-info strong{font-size:12px;display:block;margin-bottom:5px}
+.event-info small{font-size:11px;color:var(--muted);line-height:1.7}
+.tag{display:inline-block;padding:5px 8px;border-radius:7px;background:#eaf4e9;color:#39714c;font-size:10px;font-weight:700}
+.tag.orange{background:#fff0e4;color:#a35d2c}
+.tag.blue-tag{background:#edf1fc;color:#5069a4}
+.activity-list{display:grid}
+.activity-item{display:flex;gap:11px;padding:13px 0;border-bottom:1px solid var(--line)}
+.activity-item:last-child{border:0}
+.activity-dot{width:34px;height:34px;flex-shrink:0;border-radius:50%;background:#eaf3e9;display:grid;place-items:center}
+.activity-item strong{display:block;font-size:12px;margin-bottom:5px}
+.activity-item small{font-size:11px;color:var(--muted);line-height:1.6}
+.progress-wrap{padding-top:17px;margin-top:14px;border-top:1px solid var(--line)}
+.progress-head{display:flex;justify-content:space-between;font-size:11px;margin-bottom:9px}
+.progress-head span{color:var(--muted)}
+.progress{height:7px;border-radius:20px;background:#edf0e9;overflow:hidden}
+.progress div{height:100%;background:var(--green);border-radius:20px;transition:width .3s}
+.section-gap{margin-top:19px}
+.toolbar{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:11px;margin-bottom:16px}
+.filters{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.search{background:#fff;border:1px solid var(--line);border-radius:10px;padding:10px 12px;min-width:200px;max-width:100%;color:var(--ink)}
+select,.field input,.field select,.field textarea{border:1px solid var(--line);background:#fff;border-radius:9px;padding:10px 11px;color:var(--ink);width:100%}
+.filters select{width:auto;max-width:190px}
+.table-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:13px;background:#fff}
+table{width:100%;border-collapse:collapse;white-space:nowrap;text-align:left}
+th{font-size:10px;text-transform:uppercase;letter-spacing:.8px;color:var(--muted);background:#fafbf9;padding:14px 15px}
+td{padding:14px 15px;border-top:1px solid var(--line);font-size:12px}
+td strong{font-size:12px}
+td small{display:block;color:var(--muted);font-size:11px;margin-top:4px}
+.table-empty{text-align:center;padding:38px;color:var(--muted)}
+.row-actions{display:flex;gap:6px}
+.volunteer-cell{display:flex;align-items:center;gap:9px}
+.volunteer-cell .avatar{width:32px;height:32px;font-size:11px}
+.opportunity-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:15px}
+.op-card{background:#fff;border:1px solid var(--line);border-radius:16px;padding:19px;box-shadow:var(--shadow);display:flex;flex-direction:column;min-width:0}
+.op-top{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:15px}
+.op-symbol{width:41px;height:41px;border-radius:12px;background:#edf4e8;display:grid;place-items:center;font-size:20px}
+.op-card h3{font:800 16px Manrope,sans-serif;margin:0 0 9px}
+.op-card p{font-size:12px;color:var(--muted);line-height:1.65;margin-bottom:14px}
+.op-meta{display:grid;gap:9px;padding:13px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);font-size:11px;color:#58665d}
+.op-meta span{display:flex;gap:8px}
+.op-footer{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:auto;padding-top:14px}
+.slots{font-size:11px;color:var(--muted)}
+.slots strong{color:var(--green)}
+.panel-note{padding:16px;border-radius:12px;background:#f0f5eb;font-size:12px;color:#4d6251;line-height:1.7;margin-bottom:16px}
+.empty{padding:35px 15px;text-align:center;color:var(--muted);border:1px dashed #d8e0d6;border-radius:13px}
+.empty span{font-size:28px;display:block;margin-bottom:10px}
+.empty strong{display:block;color:var(--ink);margin-bottom:7px}
+.modal-backdrop{display:none;position:fixed;inset:0;background:#12241975;z-index:10;padding:18px;align-items:center;justify-content:center}
+.modal-backdrop.open{display:flex}
+.modal{width:100%;max-width:540px;max-height:90vh;overflow:auto;background:#fff;border-radius:19px;padding:25px;box-shadow:0 20px 70px #0002}
+.modal-head{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:20px;gap:12px}
+.modal-head h3{font:800 21px Manrope,sans-serif;margin:0 0 5px}
+.modal-head p{font-size:12px;color:var(--muted);margin:0;line-height:1.6}
+.close-btn{border:0;background:#f1f3ef;border-radius:9px;width:34px;height:34px;font-size:19px}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.field{display:grid;gap:7px}
+.field label{font-size:11px;font-weight:700;color:#516056}
+.field.full{grid-column:1/-1}
+.field textarea{resize:vertical;min-height:85px}
+.form-actions{display:flex;justify-content:flex-end;gap:9px;margin-top:20px}
+.toast{position:fixed;right:22px;bottom:22px;z-index:20;max-width:calc(100vw - 44px);padding:13px 18px;background:#183f2c;color:white;border-radius:12px;box-shadow:0 8px 30px #0002;opacity:0;transform:translateY(12px);pointer-events:none;transition:.25s;font-size:12px}
+.toast.show{opacity:1;transform:translateY(0)}
+.report-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:20px}
+.report-stat{background:#fff;border:1px solid var(--line);border-radius:14px;padding:20px}
+.report-stat small{color:var(--muted);font-size:11px}
+.report-stat strong{display:block;font:800 27px Manrope,sans-serif;margin:10px 0 5px}
+.report-stat p{font-size:11px;color:var(--muted);margin:0}
+.bar-list{display:grid;gap:17px}
+.bar-row{display:grid;grid-template-columns:130px 1fr 35px;align-items:center;gap:12px;font-size:12px}
+.bar-track{height:9px;background:#edf1ea;border-radius:20px;overflow:hidden}
+.bar-fill{height:100%;background:var(--green);border-radius:20px}
+@media(max-width:1050px){
+ .sidebar{width:205px}.content{padding:26px 22px}.topbar{padding:0 22px}
+ .stats{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .dashboard-grid{grid-template-columns:1fr}.opportunity-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media(max-width:650px){
+ .app{display:block}.sidebar{width:100%;padding:12px 12px 8px;border-right:0;border-bottom:1px solid var(--line)}
+ .brand{margin:0 5px 12px}.brand-icon{width:34px;height:34px}
+ .nav-label,.side-bottom{display:none}
+ .nav{display:flex;overflow-x:auto;gap:5px;padding-bottom:3px}
+ .nav button{flex-shrink:0;gap:6px;padding:10px;font-size:11px}
+ .nav-icon{width:auto}
+ .topbar{height:52px;padding:0 16px}
+ .content{padding:23px 14px 35px}
+ .heading{align-items:flex-start;flex-direction:column}
+ .heading>.btn{width:100%}
+ .stats{gap:9px}.stat{padding:14px}.stat-number{font-size:25px}
+ .stat-icon{width:30px;height:30px}.stat-label{font-size:11px}
+ .card{padding:15px}.opportunity-grid{grid-template-columns:1fr}
+ .report-grid{grid-template-columns:1fr}
+ .date-label{display:none}.search{min-width:0;width:100%}
+ .filters{width:100%}.filters select{flex:1;min-width:0}
+ .toolbar>.btn{width:100%}.form-grid{grid-template-columns:1fr}
+ .field.full{grid-column:auto}.bar-row{grid-template-columns:90px 1fr 25px;gap:8px}
+ .opportunity-row{gap:8px}.tag{font-size:9px}
+}
+@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
+</style>
+</head>
+<body>
+<div class="app">
+<aside class="sidebar">
+  <div class="brand">
+    <div class="logo">✳</div>
+    <div><strong>VolunteerHub</strong><small>COMMUNITY IMPACT PLATFORM</small></div>
+  </div>
+
+  <div class="nav-label">WORKSPACE</div>
+  <nav class="nav" aria-label="Main navigation">
+    <button class="active" data-page="dashboard"><span class="nav-icon">▦</span>Dashboard</button>
+    <button data-page="opportunities"><span class="nav-icon">♡</span>Opportunities</button>
+    <button data-page="volunteers"><span class="nav-icon">♧</span>Volunteers</button>
+    <button data-page="signups"><span class="nav-icon">▤</span>Signups & Attendance</button>
+    <button data-page="reports"><span class="nav-icon">↗</span>Impact Reports</button>
+  </nav>
+
+  <div class="side-bottom">
+    <div class="mini-impact">
+      <div class="leaf">🌱</div>
+      <strong>Small acts. Big impact.</strong>
+      <p>Every volunteer hour helps build a stronger, more connected community.</p>
+    </div>
+    <div class="profile">
+      <div class="avatar">AD</div>
+      <div><strong>Organization Admin</strong><small>Community Coordinator</small></div>
+    </div>
+  </div>
+</aside>
+
+<main class="main">
+<header class="topbar">
+  <div class="crumb">Workspace / <strong id="crumb">Dashboard</strong></div>
+  <div class="top-actions">
+    <span class="date-label" id="today"></span>
+    <button class="btn secondary small-btn" id="exportBtn">↓ Export CSV</button>
+  </div>
+</header>
+
+<div class="content">
+<section class="page active" id="page-dashboard">
+  <div class="heading">
+    <div>
+      <div class="eyebrow">YOUR COMMUNITY, YOUR IMPACT</div>
+      <h2>Good things start here. <span style="color:var(--green)">✳</span></h2>
+      <p>Welcome back! Here's what's happening in your volunteer community.</p>
+    </div>
+    <button class="btn primary" onclick="openOpportunity()">＋ Create opportunity</button>
+  </div>
+
+  <div class="stats">
+    <div class="stat"><div class="stat-top"><span class="stat-label">Registered volunteers</span><span class="stat-icon green">♧</span></div><div class="stat-number" id="stat-volunteers">0</div><div class="stat-foot">People in your community</div></div>
+    <div class="stat"><div class="stat-top"><span class="stat-label">Open opportunities</span><span class="stat-icon yellow">♡</span></div><div class="stat-number" id="stat-open">0</div><div class="stat-foot">Ways to make a difference</div></div>
+    <div class="stat"><div class="stat-top"><span class="stat-label">Hours contributed</span><span class="stat-icon purple">◷</span></div><div class="stat-number" id="stat-hours">0</div><div class="stat-foot">Verified service hours</div></div>
+    <div class="stat"><div class="stat-top"><span class="stat-label">Confirmed signups</span><span class="stat-icon blue">✓</span></div><div class="stat-number" id="stat-signups">0</div><div class="stat-foot">Volunteer commitments</div></div>
+  </div>
+
+  <div class="dashboard-grid">
+    <div class="card">
+      <div class="card-heading"><div><h3>Upcoming opportunities</h3><p>Make every moment count.</p></div><button class="text-btn" onclick="navigate('opportunities')">View all ↗</button></div>
+      <div class="opportunity-list" id="dashboard-opportunities"></div>
+    </div>
+    <div class="card">
+      <div class="card-heading"><div><h3>Community activity</h3><p>Your latest volunteer updates.</p></div><span class="tag">LIVE DATA</span></div>
+      <div class="activity-list" id="activity-list"></div>
+      <div class="progress-wrap">
+        <div class="progress-head"><strong>Annual service goal</strong><span id="goal-label">0 / 500 hours</span></div>
+        <div class="progress"><div id="goal-progress" style="width:0%"></div></div>
+      </div>
+    </div>
+  </div>
+  <div class="card section-gap">
+    <div class="card-heading"><div><h3>Quick actions</h3><p>Keep your community moving forward.</p></div></div>
+    <div class="filters">
+      <button class="btn secondary" onclick="openVolunteer()">＋ Register a volunteer</button>
+      <button class="btn secondary" onclick="openOpportunity()">＋ Post an opportunity</button>
+      <button class="btn secondary" onclick="navigate('signups')">✓ Record attendance</button>
+      <button class="btn secondary" onclick="navigate('reports')">↗ View impact report</button>
+    </div>
+  </div>
+</section>
+
+<section class="page" id="page-opportunities">
+  <div class="heading">
+    <div><div class="eyebrow">FIND YOUR PURPOSE</div><h2>Service opportunities</h2><p>Create meaningful experiences and help people find their next way to give back.</p></div>
+    <button class="btn primary" onclick="openOpportunity()">＋ New opportunity</button>
+  </div>
+  <div class="toolbar">
+    <div class="filters"><input class="search" id="op-search" placeholder="⌕  Search opportunities..." aria-label="Search opportunities"><select id="op-category" aria-label="Filter by category"><option value="">All categories</option><option>Environment</option><option>Food & Hunger</option><option>Education</option><option>Community</option><option>Animal Welfare</option><option>Other</option></select><select id="op-status" aria-label="Filter opportunities by status"><option value="">All statuses</option><option value="open">Open</option><option value="full">Full</option><option value="past">Past</option></select></div>
+    <span class="stat-foot" id="op-count"></span>
+  </div>
+  <div class="opportunity-grid" id="opportunity-grid"></div>
+</section>
+
+<section class="page" id="page-volunteers">
+  <div class="heading">
+    <div><div class="eyebrow">THE PEOPLE BEHIND THE CHANGE</div><h2>Volunteer directory</h2><p>Keep volunteer contact information, interests, and service records organized.</p></div>
+    <button class="btn primary" onclick="openVolunteer()">＋ Add volunteer</button>
+  </div>
+  <div class="toolbar">
+    <div class="filters"><input class="search" id="vol-search" placeholder="⌕  Search volunteers..." aria-label="Search volunteers"><select id="vol-interest" aria-label="Filter volunteers by interest"><option value="">All interests</option><option>Environment</option><option>Food & Hunger</option><option>Education</option><option>Community</option><option>Animal Welfare</option><option>Other</option></select></div>
+    <span class="stat-foot" id="vol-count"></span>
+  </div>
+  <div class="table-wrap"><table><thead><tr><th>Volunteer</th><th>Contact</th><th>Interests</th><th>Service hours</th><th>Joined</th><th>Actions</th></tr></thead><tbody id="volunteer-table"></tbody></table></div>
+</section>
+
+<section class="page" id="page-signups">
+  <div class="heading">
+    <div><div class="eyebrow">SHOWING UP MATTERS</div><h2>Signups & attendance</h2><p>Track commitments, manage attendance, and record completed service hours.</p></div>
+    <button class="btn primary" onclick="openSignup()">＋ Add signup</button>
+  </div>
+  <div class="stats" style="grid-template-columns:repeat(3,minmax(0,1fr))">
+    <div class="stat"><div class="stat-label">Total signups</div><div class="stat-number" id="signup-total">0</div></div>
+    <div class="stat"><div class="stat-label">Awaiting attendance</div><div class="stat-number" id="signup-pending">0</div></div>
+    <div class="stat"><div class="stat-label">Completed shifts</div><div class="stat-number" id="signup-completed">0</div></div>
+  </div>
+  <div class="toolbar"><div class="filters"><input class="search" id="signup-search" placeholder="⌕  Search signups..." aria-label="Search signups"><select id="signup-filter" aria-label="Filter signups"><option value="">All statuses</option><option>Registered</option><option>Attended</option><option>Cancelled</option></select></div></div>
+  <div class="table-wrap"><table><thead><tr><th>Volunteer</th><th>Opportunity</th><th>Event date</th><th>Status</th><th>Hours</th><th>Actions</th></tr></thead><tbody id="signup-table"></tbody></table></div>
+  <div class="panel-note section-gap">Attendance tip: select <strong>Mark attended</strong> after a volunteer completes their shift, then enter the actual hours served. Completed hours are included in impact reports.</div>
+</section>
+
+<section class="page" id="page-reports">
+  <div class="heading">
+    <div><div class="eyebrow">MEASURE WHAT MATTERS</div><h2>Community impact</h2><p>Understand your organization's participation and service contributions.</p></div>
+    <button class="btn primary" onclick="exportCSV()">↓ Download report</button>
+  </div>
+  <div class="report-grid">
+    <div class="report-stat"><small>Total service hours</small><strong id="report-hours">0</strong><p>Recorded completed service</p></div>
+    <div class="report-stat"><small>Active volunteers</small><strong id="report-volunteers">0</strong><p>Volunteers with a signup</p></div>
+    <div class="report-stat"><small>Attendance rate</small><strong id="report-attendance">0%</strong><p>Attended out of resolved signups</p></div>
+  </div>
+  <div class="dashboard-grid">
+    <div class="card"><div class="card-heading"><div><h3>Volunteer participation</h3><p>Completed shifts by service area.</p></div></div><div class="bar-list" id="category-bars"></div></div>
+    <div class="card"><div class="card-heading"><div><h3>Organization overview</h3><p>Your community at a glance.</p></div></div><div class="activity-list" id="report-summary"></div><div class="progress-wrap"><div class="progress-head"><strong>Annual hours goal</strong><span id="report-goal-label">0 / 500</span></div><div class="progress"><div id="report-goal" style="width:0%"></div></div></div></div>
+  </div>
+  <div class="card section-gap"><div class="card-heading"><div><h3>Data & records</h3><p>Export a backup of your volunteer management data.</p></div></div><p style="font-size:12px;color:var(--muted);line-height:1.7">Export volunteer records, service opportunities, signup statuses, and participation hours into CSV files for reporting or further analysis.</p><div class="filters"><button class="btn secondary" onclick="exportCSV('volunteers')">Export volunteers</button><button class="btn secondary" onclick="exportCSV('opportunities')">Export opportunities</button><button class="btn secondary" onclick="exportCSV('signups')">Export signups</button><button class="btn primary" onclick="backupData()">Export full JSON backup</button></div></div>
+</section>
+</div>
+</main>
+</div>
+
+<div class="modal-backdrop" id="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+<div class="modal">
+  <div class="modal-head"><div><h3 id="modal-title">Add record</h3><p id="modal-description">Enter the details below.</p></div><button class="close-btn" onclick="closeModal()" aria-label="Close dialog">×</button></div>
+  <form id="modal-form"><div class="form-grid" id="modal-fields"></div><div class="form-actions"><button type="button" class="btn secondary" onclick="closeModal()">Cancel</button><button type="submit" class="btn primary" id="modal-submit">Save record</button></div></form>
+</div>
+</div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+"use strict";
+
+/* VolunteerHub
+   Frontend stack: HTML5, CSS3, vanilla JavaScript.
+   Storage: browser localStorage. No server or account system required.
+*/
+const STORAGE_KEY = "volunteerhub-data-v1";
+const CATEGORIES = ["Environment","Food & Hunger","Education","Community","Animal Welfare","Other"];
+const $ = id => document.getElementById(id);
+const esc = value => String(value ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const todayISO = () => {
+  const d = new Date();
+  return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,"0")}-${String(d.getDate()).padStart(2,"0")}`;
+};
+const dateOffset = n => {
+  const d = new Date();
+  d.setDate(d.getDate()+n);
+  return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,"0")}-${String(d.getDate()).padStart(2,"0")}`;
+};
+const formatDate = value => {
+  if (!value) return "Not set";
+  const d = new Date(value+"T12:00:00");
+  return Number.isNaN(d.getTime()) ? value : d.toLocaleDateString("en-US",{month:"short",day:"numeric",year:"numeric"});
+};
+const initials = name => String(name || "?").trim().split(/\s+/).slice(0,2).map(x=>x[0]||"").join("").toUpperCase();
+const uid = prefix => prefix+"_"+Date.now().toString(36)+"_"+Math.random().toString(36).slice(2,7);
+
+function seedData(){
+  const volunteers = [
+    {id:"v1",name:"Maya Johnson",email:"maya@example.org",phone:"404-555-0121",interest:"Environment",joined:dateOffset(-42)},
+    {id:"v2",name:"Ethan Williams",email:"ethan@example.org",phone:"404-555-0122",interest:"Food & Hunger",joined:dateOffset(-32)},
+    {id:"v3",name:"Sophia Patel",email:"sophia@example.org",phone:"404-555-0123",interest:"Education",joined:dateOffset(-21)},
+    {id:"v4",name:"Noah Davis",email:"noah@example.org",phone:"404-555-0124",interest:"Community",joined:dateOffset(-14)}
+  ];
+  const opportunities = [
+    {id:"o1",title:"Community Garden Day",category:"Environment",date:dateOffset(3),time:"09:00",location:"Community Garden",slots:12,description:"Help plant seasonal vegetables, care for garden beds, and create a greener neighborhood.",status:"Open"},
+    {id:"o2",title:"Neighborhood Food Drive",category:"Food & Hunger",date:dateOffset(6),time:"10:00",location:"Community Center",slots:10,description:"Sort donated groceries, prepare food boxes, and help local families access essential supplies.",status:"Open"},
+    {id:"o3",title:"After-School Reading",category:"Education",date:dateOffset(9),time:"15:30",location:"Public Library",slots:8,description:"Encourage young readers through friendly reading sessions, homework support, and learning games.",status:"Open"},
+    {id:"o4",title:"Park Clean-Up",category:"Community",date:dateOffset(13),time:"08:30",location:"Riverside Park",slots:15,description:"Work together to collect litter and care for shared outdoor spaces.",status:"Open"},
+    {id:"o5",title:"Animal Shelter Helpers",category:"Animal Welfare",date:dateOffset(17),time:"11:00",location:"Local Animal Shelter",slots:6,description:"Help shelter staff with approved enrichment activities, supplies, and general organization.",status:"Open"}
+  ];
+  const signups = [
+    {id:"s1",volunteerId:"v1",opportunityId:"o1",status:"Registered",hours:0},
+    {id:"s2",volunteerId:"v2",opportunityId:"o2",status:"Registered",hours:0},
+    {id:"s3",volunteerId:"v3",opportunityId:"o3",status:"Registered",hours:0},
+    {id:"s4",volunteerId:"v4",opportunityId:"o4",status:"Registered",hours:0}
+  ];
+  return {volunteers,opportunities,signups,goal:500,activity:[]};
+}
+function loadData(){
+  try{
+    const raw=localStorage.getItem(STORAGE_KEY);
+    if(!raw)return seedData();
+    const data=JSON.parse(raw);
+    if(!data || !Array.isArray(data.volunteers) || !Array.isArray(data.opportunities) || !Array.isArray(data.signups))return seedData();
+    return {...seedData(),...data};
+  }catch(e){return seedData();}
+}
+let db=loadData();
+let modalSubmitAction=null;
+let toastTimer=null;
+
+function save(){
+  try{
+    localStorage.setItem(STORAGE_KEY,JSON.stringify(db));
+    return true;
+  }catch(e){
+    notify("Couldn't save to browser storage. Export your data as a backup.");
+    return false;
+  }
+}
+function notify(message){
+  $("toast").textContent=message;
+  $("toast").classList.add("show");
+  clearTimeout(toastTimer);
+  toastTimer=setTimeout(()=>$("toast").classList.remove("show"),3000);
+}
+function navigate(page){
+  const valid=["dashboard","opportunities","volunteers","signups","reports"];
+  if(!valid.includes(page))return;
+  document.querySelectorAll(".page").forEach(el=>el.classList.remove("active"));
+  $("page-"+page).classList.add("active");
+  document.querySelectorAll(".nav button").forEach(el=>el.classList.toggle("active",el.dataset.page===page));
+  const label={dashboard:"Dashboard",opportunities:"Opportunities",volunteers:"Volunteers",signups:"Signups & Attendance",reports:"Impact Reports"};
+  $("crumb").textContent=label[page];
+  render();
+}
+document.querySelectorAll(".nav button").forEach(button=>button.addEventListener("click",()=>navigate(button.dataset.page)));
+$("today").textContent=new Date().toLocaleDateString("en-US",{weekday:"short",month:"short",day:"numeric",year:"numeric"});
+
+const getVolunteer=id=>db.volunteers.find(v=>v.id===id);
+const getOpportunity=id=>db.opportunities.find(o=>o.id===id);
+const signupCount=id=>db.signups.filter(s=>s.opportunityId===id&&s.status!=="Cancelled").length;
+const spotsLeft=o=>Math.max(0,Number(o.slots)-signupCount(o.id));
+const openOpportunityCount=()=>db.opportunities.filter(o=>o.status==="Open"&&o.date>=todayISO()&&spotsLeft(o)>0).length;
+const totalHours=()=>db.signups.filter(s=>s.status==="Attended").reduce((n,s)=>n+Number(s.hours||0),0);
+const resolvedCount=()=>db.signups.filter(s=>s.status==="Attended"||s.status==="Cancelled").length;
+const attendanceRate=()=>resolvedCount()?Math.round(db.signups.filter(s=>s.status==="Attended").length/resolvedCount()*100):0;
+function tagClass(category){
+  if(category==="Food & Hunger")return "orange";
+  if(category==="Education")return "blue-tag";
+  return "";
+}
+function eventIcon(category){
+  return {"Environment":"🌱","Food & Hunger":"🥕","Education":"📚","Community":"🤝","Animal Welfare":"🐾","Other":"💚"}[category]||"💚";
+}
+function logActivity(message){
+  db.activity.unshift({message,time:new Date().toISOString()});
+  db.activity=db.activity.slice(0,12);
+}
+function relativeTime(iso){
+  if(!iso)return "Recently";
+  const mins=Math.max(0,Math.floor((Date.now()-new Date(iso).getTime())/60000));
+  if(mins<1)return "Just now";
+  if(mins<60)return mins+" min ago";
+  if(mins<1440)return Math.floor(mins/60)+" hr ago";
+  return Math.floor(mins/1440)+" days ago";
+}
+function render(){
+  renderDashboard();renderOpportunities();renderVolunteers();renderSignups();renderReports();
+}
+function renderDashboard(){
+  $("stat-volunteers").textContent=db.volunteers.length;
+  $("stat-open").textContent=openOpportunityCount();
+  $("stat-hours").textContent=totalHours().toLocaleString();
+  $("stat-signups").textContent=db.signups.filter(s=>s.status==="Registered").length;
+  const upcoming=db.opportunities.filter(o=>o.date>=todayISO()&&o.status==="Open").sort((a,b)=>a.date.localeCompare(b.date)).slice(0,4);
+  $("dashboard-opportunities").innerHTML=upcoming.length?upcoming.map(o=>`
+    <div class="opportunity-row">
+      <div class="event-date"><strong>${esc(new Date(o.date+"T12:00:00").getDate())}</strong><small>${esc(new Date(o.date+"T12:00:00").toLocaleDateString("en-US",{month:"short"}))}</small></div>
+      <div class="event-info"><strong>${esc(o.title)}</strong><small>${esc(o.time)} · ${esc(o.location)}<br>${spotsLeft(o)} spots remaining</small></div>
+      <span class="tag ${tagClass(o.category)}">${esc(o.category)}</span>
+    </div>`).join(""):`<div class="empty"><span>🌱</span><strong>No upcoming opportunities</strong>Create an opportunity to get started.</div>`;
+  const activities=db.activity.length?db.activity.slice(0,5):[
+    {message:"Your VolunteerHub workspace is ready.",time:new Date().toISOString()},
+    {message:"Explore service opportunities and invite volunteers.",time:new Date().toISOString()}
+  ];
+  $("activity-list").innerHTML=activities.map(a=>`<div class="activity-item"><div class="activity-dot">✳</div><div><strong>${esc(a.message)}</strong><small>${relativeTime(a.time)}</small></div></div>`).join("");
+  $("goal-label").textContent=`${totalHours()} / ${db.goal} hours`;
+  $("goal-progress").style.width=Math.min(100,totalHours()/Math.max(1,db.goal)*100)+"%";
+}
+function renderOpportunities(){
+  const q=($("op-search").value||"").toLowerCase();
+  const category=$("op-category").value,status=$("op-status").value;
+  const list=db.opportunities.filter(o=>{
+    const match=(o.title+" "+o.location+" "+o.description+" "+o.category).toLowerCase().includes(q);
+    const full=spotsLeft(o)===0;
+    const past=o.date<todayISO();
+    return match&&(!category||o.category===category)&&(!status||(status==="past"?past:status==="full"?full&&!past:!full&&!past&&o.status==="Open"));
+  }).sort((a,b)=>a.date.localeCompare(b.date));
+  $("op-count").textContent=`${list.length} opportunit${list.length===1?"y":"ies"}`;
+  $("opportunity-grid").innerHTML=list.length?list.map(o=>{
+    const past=o.date<todayISO(),full=spotsLeft(o)===0;
+    const status=past?"Past":full?"Full":o.status;
+    return `<article class="op-card">
+      <div class="op-top"><div class="op-symbol">${eventIcon(o.category)}</div><span class="tag ${past||full?"orange":tagClass(o.category)}">${status}</span></div>
+      <h3>${esc(o.title)}</h3><p>${esc(o.description)}</p>
+      <div class="op-top" style="justify-content:flex-start;margin:0 0 12px"><span class="tag ${tagClass(o.category)}">${esc(o.category)}</span></div>
+      <div class="op-meta"><span>◷ ${esc(formatDate(o.date))} · ${esc(o.time)}</span><span>⌖ ${esc(o.location)}</span><span>♧ ${signupCount(o.id)} / ${Number(o.slots)} volunteers signed up</span></div>
+      <div class="op-footer"><span class="slots"><strong>${spotsLeft(o)}</strong> spots left</span>
+      <div class="row-actions"><button class="btn secondary small-btn" onclick="editOpportunity('${o.id}')">Edit</button><button class="btn primary small-btn" ${past||full||o.status!=="Open"?"disabled":""} onclick="signupFor('${o.id}')">Sign up</button></div></div>
+    </article>`;
+  }).join(""):`<div class="empty" style="grid-column:1/-1"><span>🌿</span><strong>No matching opportunities</strong>Try a different search or create a new service opportunity.</div>`;
+}
+function renderVolunteers(){
+  const q=($("vol-search").value||"").toLowerCase(),interest=$("vol-interest").value;
+  const list=db.volunteers.filter(v=>(v.name+" "+v.email+" "+v.phone+" "+v.interest).toLowerCase().includes(q)&&(!interest||v.interest===interest));
+  $("vol-count").textContent=`${list.length} volunteers`;
+  $("volunteer-table").innerHTML=list.length?list.map(v=>{
+    const hours=db.signups.filter(s=>s.volunteerId===v.id&&s.status==="Attended").reduce((n,s)=>n+Number(s.hours||0),0);
+    return `<tr><td><div class="volunteer-cell"><div class="avatar">${esc(initials(v.name))}</div><div><strong>${esc(v.name)}</strong><small>${esc(v.interest)}</small></div></div></td><td>${esc(v.email)}<small>${esc(v.phone||"No phone provided")}</small></td><td><span class="tag ${tagClass(v.interest)}">${esc(v.interest)}</span></td><td><strong>${hours}</strong></td><td>${esc(formatDate(v.joined))}</td><td><div class="row-actions"><button class="btn secondary small-btn" onclick="editVolunteer('${v.id}')">Edit</button><button class="btn danger small-btn" onclick="deleteVolunteer('${v.id}')">Delete</button></div></td></tr>`;
+  }).join(""):`<tr><td colspan="6" class="table-empty">No volunteers found. Add a volunteer to get started.</td></tr>`;
+}
+function renderSignups(){
+  $("signup-total").textContent=db.signups.length;
+  $("signup-pending").textContent=db.signups.filter(s=>s.status==="Registered").length;
+  $("signup-completed").textContent=db.signups.filter(s=>s.status==="Attended").length;
+  const q=($("signup-search").value||"").toLowerCase(),filter=$("signup-filter").value;
+  const list=db.signups.filter(s=>{
+    const v=getVolunteer(s.volunteerId),o=getOpportunity(s.opportunityId);
+    return ((v?.name||"")+" "+(o?.title||"")).toLowerCase().includes(q)&&(!filter||s.status===filter);
+  });
+  $("signup-table").innerHTML=list.length?list.map(s=>{
+    const v=getVolunteer(s.volunteerId),o=getOpportunity(s.opportunityId);
+    const cls=s.status==="Attended"?"":s.status==="Cancelled"?"orange":"blue-tag";
+    return `<tr><td><strong>${esc(v?.name||"Removed volunteer")}</strong><small>${esc(v?.email||"")}</small></td><td>${esc(o?.title||"Removed opportunity")}</td><td>${esc(formatDate(o?.date))}</td><td><span class="tag ${cls}">${esc(s.status)}</span></td><td>${s.status==="Attended"?Number(s.hours||0):"Not recorded"}</td><td><div class="row-actions">${s.status==="Registered"?`<button class="btn primary small-btn" onclick="markAttended('${s.id}')">Mark attended</button><button class="btn danger small-btn" onclick="cancelSignup('${s.id}')">Cancel</button>`:s.status==="Attended"?`<button class="btn secondary small-btn" onclick="editHours('${s.id}')">Edit hours</button>`:`<button class="btn secondary small-btn" onclick="restoreSignup('${s.id}')">Restore</button>`}</div></td></tr>`;
+  }).join(""):`<tr><td colspan="6" class="table-empty">No signups match your filters.</td></tr>`;
+}
+function renderReports(){
+  const hours=totalHours(),active=new Set(db.signups.filter(s=>s.status!=="Cancelled").map(s=>s.volunteerId)).size;
+  $("report-hours").textContent=hours.toLocaleString();
+  $("report-volunteers").textContent=active;
+  $("report-attendance").textContent=attendanceRate()+"%";
+  const attended=db.signups.filter(s=>s.status==="Attended");
+  const totals={};CATEGORIES.forEach(c=>totals[c]=0);
+  attended.forEach(s=>{const o=getOpportunity(s.opportunityId);if(o)totals[o.category]=(totals[o.category]||0)+1;});
+  const max=Math.max(1,...Object.values(totals));
+  $("category-bars").innerHTML=CATEGORIES.map(c=>`<div class="bar-row"><span>${esc(c)}</span><div class="bar-track"><div class="bar-fill" style="width:${totals[c]/max*100}%"></div></div><strong>${totals[c]}</strong></div>`).join("");
+  const summary=[
+    ["♧","Registered volunteers",db.volunteers.length],
+    ["♡","Service opportunities",db.opportunities.length],
+    ["✓","Completed shifts",attended.length],
+    ["◷","Hours per completed shift",attended.length?(hours/attended.length).toFixed(1):"0"],
+    ["⌁","Open future opportunities",openOpportunityCount()]
+  ];
+  $("report-summary").innerHTML=summary.map(a=>`<div class="activity-item"><div class="activity-dot">${a[0]}</div><div style="flex:1"><strong>${esc(a[1])}</strong><small>${esc(a[2])}</small></div></div>`).join("");
+  $("report-goal-label").textContent=`${hours} / ${db.goal} hours`;
+  $("report-goal").style.width=Math.min(100,hours/Math.max(1,db.goal)*100)+"%";
+}
+
+function openModal(title,description,fields,submitText,callback){
+  $("modal-title").textContent=title;
+  $("modal-description").textContent=description;
+  $("modal-submit").textContent=submitText;
+  $("modal-fields").innerHTML=fields.map(f=>{
+    const id="f-"+f.name;
+    const cls=f.full?"field full":"field";
+    const value=f.value??"";
+    let control="";
+    if(f.type==="select"){
+      control=`<select id="${id}" name="${f.name}" ${f.required===false?"":"required"}>${(f.options||[]).map(opt=>{
+        const val=typeof opt==="string"?opt:opt.value;
+        const label=typeof opt==="string"?opt:opt.label;
+        return `<option value="${esc(val)}" ${String(val)===String(value)?"selected":""}>${esc(label)}</option>`;
+      }).join("")}</select>`;
+    }else if(f.type==="textarea"){
+      control=`<textarea id="${id}" name="${f.name}" placeholder="${esc(f.placeholder||"")}" ${f.required===false?"":"required"}>${esc(value)}</textarea>`;
+    }else{
+      control=`<input id="${id}" name="${f.name}" type="${f.type||"text"}" value="${esc(value)}" placeholder="${esc(f.placeholder||"")}" ${f.min!==undefined?`min="${f.min}"`:""} ${f.max!==undefined?`max="${f.max}"`:""} ${f.step!==undefined?`step="${f.step}"`:""} ${f.required===false?"":"required"}>`;
+    }
+    return `<div class="${cls}"><label for="${id}">${esc(f.label)}${f.required===false?" (optional)":""}</label>${control}</div>`;
+  }).join("");
+  modalSubmitAction=callback;
+  $("modal-backdrop").classList.add("open");
+  setTimeout(()=>$("modal-fields").querySelector("input,select,textarea")?.focus(),30);
+}
+function closeModal(){
+  $("modal-backdrop").classList.remove("open");
+  $("modal-form").reset();
+  modalSubmitAction=null;
+}
+$("modal-backdrop").addEventListener("click",e=>{if(e.target===$("modal-backdrop"))closeModal();});
+document.addEventListener("keydown",e=>{if(e.key==="Escape")closeModal();});
+$("modal-form").addEventListener("submit",e=>{
+  e.preventDefault();
+  if(!modalSubmitAction)return;
+  const data=Object.fromEntries(new FormData(e.currentTarget).entries());
+  const action=modalSubmitAction;
+  closeModal();
+  action(data);
+});
+
+function openVolunteer(v=null){
+  const editing=!!v;
+  openModal(editing?"Edit volunteer":"Register a volunteer",
+    editing?"Update this volunteer's information.":"Add a new member to your volunteer community.",
+    [
+      {name:"name",label:"Full name",value:v?.name||"",placeholder:"e.g. Jordan Lee"},
+      {name:"email",label:"Email address",type:"email",value:v?.email||"",placeholder:"jordan@example.org"},
+      {name:"phone",label:"Phone number",type:"tel",value:v?.phone||"",placeholder:"555-0100",required:false},
+      {name:"interest",label:"Primary interest",type:"select",value:v?.interest||"Community",options:CATEGORIES},
+      {name:"joined",label:"Registration date",type:"date",value:v?.joined||todayISO()}
+    ],editing?"Save changes":"Register volunteer",d=>{
+      if(db.volunteers.some(x=>x.email.toLowerCase()===d.email.trim().toLowerCase()&&x.id!==v?.id)){notify("A volunteer with this email already exists.");return;}
+      if(editing)Object.assign(v,d,{name:d.name.trim(),email:d.email.trim(),phone:d.phone.trim()});
+      else db.volunteers.push({id:uid("v"),...d,name:d.name.trim(),email:d.email.trim(),phone:d.phone.trim()});
+      logActivity(`${d.name} ${editing?"updated their volunteer record":"joined the volunteer community"}.`);
+      save();render();notify(editing?"Volunteer updated.":"Volunteer registered successfully.");
+    });
+}
+function editVolunteer(id){const v=getVolunteer(id);if(v)openVolunteer(v);}
+function deleteVolunteer(id){
+  const v=getVolunteer(id);if(!v)return;
+  if(!confirm(`Delete ${v.name}'s volunteer record? Related signup records will also be removed.`))return;
+  db.volunteers=db.volunteers.filter(x=>x.id!==id);
+  db.signups=db.signups.filter(s=>s.volunteerId!==id);
+  logActivity(`${v.name}'s volunteer record was removed.`);
+  save();render();notify("Volunteer and related signups removed.");
+}
+
+function openOpportunity(o=null){
+  const editing=!!o;
+  openModal(editing?"Edit opportunity":"Create a service opportunity",
+    "Share the details volunteers need to participate.",
+    [
+      {name:"title",label:"Opportunity title",value:o?.title||"",placeholder:"e.g. Neighborhood clean-up",full:true},
+      {name:"category",label:"Service category",type:"select",value:o?.category||"Community",options:CATEGORIES},
+      {name:"date",label:"Event date",type:"date",value:o?.date||dateOffset(7)},
+      {name:"time",label:"Start time",type:"time",value:o?.time||"09:00"},
+      {name:"slots",label:"Volunteer capacity",type:"number",min:1,max:10000,value:o?.slots??10},
+      {name:"location",label:"Location",value:o?.location||"",placeholder:"Venue or address",full:true},
+      {name:"description",label:"Description",type:"textarea",value:o?.description||"",placeholder:"What will volunteers do?",full:true},
+      {name:"status",label:"Opportunity status",type:"select",value:o?.status||"Open",options:["Open","Closed"]}
+    ],editing?"Save changes":"Publish opportunity",d=>{
+      const slots=Number(d.slots);
+      if(!Number.isFinite(slots)||slots<signupCount(o?.id)||slots<1){notify("Capacity must be at least the current number of signups.");return;}
+      if(editing)Object.assign(o,{...d,title:d.title.trim(),location:d.location.trim(),description:d.description.trim(),slots});
+      else db.opportunities.push({id:uid("o"),...d,title:d.title.trim(),location:d.location.trim(),description:d.description.trim(),slots});
+      logActivity(`Opportunity "${d.title}" ${editing?"was updated":"was published"}.`);
+      save();render();notify(editing?"Opportunity updated.":"Opportunity published.");
+    });
+}
+function editOpportunity(id){const o=getOpportunity(id);if(o)openOpportunity(o);}
+function signupFor(opportunityId){
+  const o=getOpportunity(opportunityId);
+  if(!o||o.date<todayISO()||o.status!=="Open"||spotsLeft(o)<=0){notify("This opportunity isn't accepting signups.");return;}
+  if(!db.volunteers.length){notify("Register a volunteer first.");openVolunteer();return;}
+  const already=db.signups.filter(s=>s.opportunityId===o.id&&s.status!=="Cancelled");
+  const available=db.volunteers.filter(v=>!already.some(s=>s.volunteerId===v.id));
+  if(!available.length){notify("All registered volunteers have already signed up, or the event is full.");return;}
+  openModal("Sign up for an opportunity","Choose the volunteer who will participate.",[
+    {name:"volunteerId",label:"Volunteer",type:"select",options:available.map(v=>({value:v.id,label:v.name+" · "+v.email}))}
+  ],"Confirm signup",d=>{
+    if(db.signups.some(s=>s.opportunityId===o.id&&s.volunteerId===d.volunteerId&&s.status!=="Cancelled")){notify("This volunteer is already signed up.");return;}
+    if(spotsLeft(o)<=0){notify("This opportunity is now full.");return;}
+    const v=getVolunteer(d.volunteerId);
+    db.signups.push({id:uid("s"),volunteerId:d.volunteerId,opportunityId:o.id,status:"Registered",hours:0});
+    logActivity(`${v?.name||"A volunteer"} signed up for ${o.title}.`);
+    save();render();notify("Signup confirmed.");
+  });
+}
+function openSignup(){
+  const available=db.volunteers.filter(v=>db.opportunities.some(o=>o.date>=todayISO()&&o.status==="Open"&&spotsLeft(o)>0&&!db.signups.some(s=>s.volunteerId===v.id&&s.opportunityId===o.id&&s.status!=="Cancelled")));
+  if(!available.length){notify("Add a volunteer or create an available opportunity first.");return;}
+  const openOps=db.opportunities.filter(o=>o.date>=todayISO()&&o.status==="Open"&&spotsLeft(o)>0);
+  if(!openOps.length){notify("There aren't any open opportunities with available spots.");return;}
+  openModal("Add a signup","Match a volunteer with a service opportunity.",[
+    {name:"volunteerId",label:"Volunteer",type:"select",options:available.map(v=>({value:v.id,label:v.name}))},
+    {name:"opportunityId",label:"Opportunity",type:"select",options:openOps.map(o=>({value:o.id,label:o.title+" · "+formatDate(o.date)}))}
+  ],"Confirm signup",d=>{
+    if(db.signups.some(s=>s.volunteerId===d.volunteerId&&s.opportunityId===d.opportunityId&&s.status!=="Cancelled")){notify("This volunteer already has a signup for that event.");return;}
+    const o=getOpportunity(d.opportunityId),v=getVolunteer(d.volunteerId);
+    if(!o||spotsLeft(o)<=0){notify("No spots remain for this opportunity.");return;}
+    db.signups.push({id:uid("s"),...d,status:"Registered",hours:0});
+    logActivity(`${v?.name||"Volunteer"} signed up for ${o.title}.`);
+    save();render();notify("Signup created.");
+  });
+}
+function markAttended(id){
+  const s=db.signups.find(x=>x.id===id);if(!s)return;
+  const v=getVolunteer(s.volunteerId),o=getOpportunity(s.opportunityId);
+  openModal("Record attendance","Confirm participation and enter actual service hours.",[
+    {name:"hours",label:"Hours completed",type:"number",min:0,max:1000,step:.25,value:s.hours||1},
+    {name:"note",label:"Attendance note",value:"",placeholder:"Optional note",required:false}
+  ],"Save attendance",d=>{
+    const hours=Number(d.hours);
+    if(!Number.isFinite(hours)||hours<0||hours>1000){notify("Enter a valid number of hours.");return;}
+    s.status="Attended";s.hours=hours;s.attendedAt=new Date().toISOString();s.note=d.note.trim();
+    logActivity(`${v?.name||"Volunteer"} completed ${hours} hour(s) at ${o?.title||"a service activity"}.`);
+    save();render();notify("Attendance recorded. Service hours updated.");
+  });
+}
+function editHours(id){
+  const s=db.signups.find(x=>x.id===id);if(!s)return;
+  openModal("Edit service hours","Correct the recorded hours for this completed shift.",[
+    {name:"hours",label:"Actual hours served",type:"number",min:0,max:1000,step:.25,value:s.hours||0}
+  ],"Update hours",d=>{
+    const hours=Number(d.hours);
+    if(!Number.isFinite(hours)||hours<0||hours>1000){notify("Enter a valid number of hours.");return;}
+    s.hours=hours;logActivity(`Service hours updated to ${hours} for ${getVolunteer(s.volunteerId)?.name||"a volunteer"}.`);
+    save();render();notify("Service hours updated.");
+  });
+}
+function cancelSignup(id){
+  const s=db.signups.find(x=>x.id===id);if(!s||!confirm("Cancel this signup?"))return;
+  s.status="Cancelled";s.hours=0;
+  logActivity(`A signup for ${getVolunteer(s.volunteerId)?.name||"a volunteer"} was cancelled.`);
+  save();render();notify("Signup cancelled.");
+}
+function restoreSignup(id){
+  const s=db.signups.find(x=>x.id===id);if(!s)return;
+  const o=getOpportunity(s.opportunityId);
+  if(!getVolunteer(s.volunteerId)||!o){notify("The volunteer or opportunity no longer exists.");return;}
+  if(o.date<todayISO()||o.status!=="Open"||spotsLeft(o)<=0){notify("This opportunity isn't available for a new signup.");return;}
+  if(db.signups.some(x=>x.id!==id&&x.volunteerId===s.volunteerId&&x.opportunityId===s.opportunityId&&x.status!=="Cancelled")){notify("This volunteer already has an active signup.");return;}
+  s.status="Registered";s.hours=0;delete s.attendedAt;
+  logActivity(`A cancelled signup was restored for ${getVolunteer(s.volunteerId)?.name||"a volunteer"}.`);
+  save();render();notify("Signup restored.");
+}
+
+function download(filename,content,type){
+  const blob=new Blob(["\ufeff"+content],{type});
+  const url=URL.createObjectURL(blob);
+  const a=document.createElement("a");a.href=url;a.download=filename;
+  document.body.appendChild(a);a.click();a.remove();
+  setTimeout(()=>URL.revokeObjectURL(url),1000);
+}
+function csvCell(v){return '"'+String(v??"").replace(/"/g,'""')+'"';}
+function exportCSV(kind){
+  const exports={
+    volunteers:{filename:"volunteerhub-volunteers.csv",headers:["ID","Name","Email","Phone","Interest","Joined"],rows:db.volunteers.map(v=>[v.id,v.name,v.email,v.phone,v.interest,v.joined])},
+    opportunities:{filename:"volunteerhub-opportunities.csv",headers:["ID","Title","Category","Date","Time","Location","Capacity","Signups","Spots Left","Status","Description"],rows:db.opportunities.map(o=>[o.id,o.title,o.category,o.date,o.time,o.location,o.slots,signupCount(o.id),spotsLeft(o),o.status,o.description])},
+    signups:{filename:"volunteerhub-signups.csv",headers:["Signup ID","Volunteer","Email","Opportunity","Event Date","Status","Hours","Attendance Note"],rows:db.signups.map(s=>[s.id,getVolunteer(s.volunteerId)?.name||"",getVolunteer(s.volunteerId)?.email||"",getOpportunity(s.opportunityId)?.title||"",getOpportunity(s.opportunityId)?.date||"",s.status,s.hours||0,s.note||""])}
+  };
+  if(!kind){
+    openModal("Export your records","Choose which dataset to download as a spreadsheet.",[
+      {name:"kind",label:"Dataset",type:"select",options:[{value:"volunteers",label:"Volunteer directory"},{value:"opportunities",label:"Service opportunities"},{value:"signups",label:"Signups and attendance"}]}
+    ],"Download CSV",d=>exportCSV(d.kind));
+    return;
+  }
+  const data=exports[kind];if(!data)return;
+  const csv=[data.headers,...data.rows].map(row=>row.map(csvCell).join(",")).join("\r\n");
+  download(data.filename,csv,"text/csv;charset=utf-8;");
+  notify("CSV export prepared.");
+}
+function backupData(){
+  download("volunteerhub-backup.json",JSON.stringify(db,null,2),"application/json;charset=utf-8;");
+  notify("Full data backup prepared.");
+}
+$("exportBtn").addEventListener("click",()=>exportCSV());
+
+["op-search","vol-search","signup-search"].forEach(id=>$(id).addEventListener("input",render));
+["op-category","op-status","vol-interest","signup-filter"].forEach(id=>$(id).addEventListener("change",render));
+
+/* Initial sample records are clearly illustrative. All records are editable. */
+render();
+</script>
+</body>
+</html>
