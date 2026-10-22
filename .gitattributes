@@ -1,0 +1,3 @@
+README.txt filter=git-crypt diff=git-crypt 
+start_auto_sync.bat filter=git-crypt diff=git-crypt 
+watch_volunteer_hub.ps1 filter=git-crypt diff=git-crypt 
