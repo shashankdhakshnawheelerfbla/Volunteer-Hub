@@ -1,0 +1,13 @@
+{
+  "name": "volunteer-hub",
+  "account_id": "878f2c31f001f05729797df79dd33f8e",
+  "pages_build_output_dir": "website",
+  "compatibility_date": "2026-10-22",
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "volunteer-db",
+      "database_id": "d27189d3-9b42-45ea-a7c4-986f0e63d9a4"
+    }
+  ]
+}
