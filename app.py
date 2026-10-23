@@ -1,15 +1,24 @@
 
-# Import Flask tools to create the website and render HTML pages.
-from flask import Flask, render_template
+# Import Flask tools for serving website files.
+from flask import Flask, send_from_directory
+from pathlib import Path
+
+# Find the folder containing app.py.
+BASE_DIR = Path(__file__).resolve().parent
 
 # Create the Flask application.
 app = Flask(__name__)
 
-# Display the homepage when someone visits the root URL.
+# Display the existing homepage.
 @app.route("/")
 def home():
-    return render_template("index.html")
+    return send_from_directory(str(BASE_DIR), "index.html")
 
-# Start the development server when this file is run directly.
+# Serve other files, including CSS and JavaScript.
+@app.route("/<path:filename>")
+def website_files(filename):
+    return send_from_directory(str(BASE_DIR), filename)
+
+# Start the development server.
 if __name__ == "__main__":
     app.run(debug=True)
