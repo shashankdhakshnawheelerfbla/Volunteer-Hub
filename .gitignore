@@ -1,11 +1,20 @@
-# OneDrive or system configurations
+
+# Environment variables and secrets
+.env
+.env.*
+!.env.example
+
+# Python virtual environments and generated files
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+
+# IDE and operating system files
+.vscode/
 Thumbs.db
 desktop.ini
 .DS_Store
 
-# Code workspace data
-.vscode/
+# Logs
 *.log
-sync_volunteer_hub.bat 
-sync_volunteer_hub.bat 
-sync_volunteer_hub.bat 
