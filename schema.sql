@@ -1,4 +1,5 @@
-
+-- Creates the table that stores volunteer account profiles.
+-- Each volunteer receives a unique numeric identifier.
 CREATE TABLE IF NOT EXISTS volunteers (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     name TEXT NOT NULL,
@@ -6,6 +7,8 @@ CREATE TABLE IF NOT EXISTS volunteers (
     created_at TEXT DEFAULT CURRENT_TIMESTAMP
 );
 
+-- Creates the table that stores volunteer opportunities.
+-- Organizers can use these fields to describe events and their schedules.
 CREATE TABLE IF NOT EXISTS opportunities (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     title TEXT NOT NULL,
@@ -18,6 +21,8 @@ CREATE TABLE IF NOT EXISTS opportunities (
     created_at TEXT DEFAULT CURRENT_TIMESTAMP
 );
 
+-- Links volunteers to the opportunities they sign up for.
+-- The foreign keys and unique constraint help prevent invalid or duplicate signups.
 CREATE TABLE IF NOT EXISTS volunteer_signups (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     volunteer_id INTEGER NOT NULL,

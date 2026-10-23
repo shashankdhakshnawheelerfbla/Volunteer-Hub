@@ -1,0 +1,166 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Log In | Volunteer Hub</title>
+  <style>
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      font-family: Arial, sans-serif;
+      background: #f3f6fc;
+      color: #172033;
+    }
+
+    .card {
+      width: 100%;
+      max-width: 420px;
+      padding: 32px;
+      background: white;
+      border-radius: 20px;
+      box-shadow: 0 12px 40px #17203312;
+    }
+
+    .brand {
+      color: #2563eb;
+      font-size: 14px;
+      font-weight: bold;
+      letter-spacing: 2px;
+    }
+
+    h1 { margin-bottom: 8px; }
+
+    .description {
+      color: #64748b;
+      line-height: 1.6;
+      margin-bottom: 24px;
+    }
+
+    label {
+      display: block;
+      margin: 16px 0 8px;
+      font-weight: bold;
+      font-size: 14px;
+    }
+
+    input {
+      width: 100%;
+      padding: 13px;
+      border: 1px solid #cbd5e1;
+      border-radius: 9px;
+      font-size: 16px;
+    }
+
+    button, .google-button {
+      display: block;
+      width: 100%;
+      padding: 14px;
+      margin-top: 18px;
+      border: none;
+      border-radius: 9px;
+      font-size: 15px;
+      font-weight: bold;
+      text-align: center;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    button {
+      background: #2563eb;
+      color: white;
+    }
+
+    .google-button {
+      margin-top: 12px;
+      border: 1px solid #cbd5e1;
+      background: white;
+      color: #172033;
+    }
+
+    .footer {
+      margin-top: 22px;
+      text-align: center;
+      font-size: 14px;
+    }
+
+    a { color: #2563eb; }
+
+    #message {
+      color: #64748b;
+      font-size: 13px;
+      line-height: 1.5;
+    }
+  </style>
+</head>
+<body>
+  <main class="card">
+    <div class="brand">VOLUNTEER HUB</div>
+
+    <h1>Welcome back!</h1>
+    <p class="description">
+      Sign in to discover opportunities and manage your volunteer activities.
+    </p>
+
+    <form id="login-form">
+      <label for="email">Email address</label>
+      <input
+        id="email"
+        name="email"
+        type="email"
+        autocomplete="email"
+        placeholder="you@example.com"
+        required
+      >
+
+      <label for="password">Password</label>
+      <input
+        id="password"
+        name="password"
+        type="password"
+        autocomplete="current-password"
+        placeholder="Enter your password"
+        required
+      >
+
+      <button type="submit">Log In</button>
+    </form>
+
+    <a class="google-button" href="/auth/google/start">
+      Continue with Google
+    </a>
+
+    <p class="footer">
+      Don't have an account?
+      <a href="/templates/signup.html">Sign up</a>
+    </p>
+
+    <p id="message" role="status">
+      Email and password sign-in must be connected to a secure backend.
+    </p>
+  </main>
+
+  <script>
+    const params = new URLSearchParams(window.location.search);
+
+    if (params.has("error")) {
+      document.getElementById("message").textContent =
+        "Google sign-in failed. Please try again.";
+    }
+
+    document.getElementById("login-form").addEventListener("submit", event => {
+      event.preventDefault();
+
+      document.getElementById("message").textContent =
+        "Email and password sign-in is not connected yet. Please use Google sign-in when it is configured.";
+    });
+  </script>
+</body>
+</html>

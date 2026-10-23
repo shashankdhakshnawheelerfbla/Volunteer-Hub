@@ -1,11 +1,7 @@
-
 {
   "name": "volunteer-hub",
   "pages_build_output_dir": "website",
   "compatibility_date": "2026-10-22",
-  "vars": {
-    "GOOGLE_CLIENT_ID": "455639690277-mgmi3qp24oqiok3sagrdniug2up9a2v4.apps.googleusercontent.com"
-  },
   "d1_databases": [
     {
       "binding": "DB",
