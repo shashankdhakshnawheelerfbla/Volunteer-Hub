@@ -29,3 +29,4 @@ IMPORTANT:
 - It ignores .git and common generated/dependency folders for change detection.
 Auto-sync test: verifying AI-generated commit messages.
 Auto-sync test: verifying AI-generated commit messages.
+Test: verify AI-generated commit messages.
