@@ -1,4 +1,3 @@
-
 @echo off
 setlocal
 cd /d "%~dp0"
@@ -44,11 +43,7 @@ if errorlevel 1 exit /b 1
 git diff --cached --quiet
 if not errorlevel 1 goto pullpush
 
-if "%OPENAI_API_KEY%"=="" (
-    echo ERROR: OPENAI_API_KEY is not set in this terminal.
-    exit /b 1
-)
-
+echo.
 echo Review staged filenames for secrets before continuing:
 git diff --cached --name-only
 set /p "CONFIRM=Commit these staged changes? Type YES to continue: "
@@ -59,7 +54,7 @@ if /I not "%CONFIRM%"=="YES" (
 
 python "%~dp0ai_commit_message.py"
 if errorlevel 1 (
-    echo ERROR: AI commit message generation failed.
+    echo ERROR: Commit message generation failed.
     exit /b 1
 )
 
