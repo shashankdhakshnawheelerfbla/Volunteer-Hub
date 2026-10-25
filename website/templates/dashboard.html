@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Your Account | Volunteer Hub</title>
+  <style>
+    *{box-sizing:border-box}body{margin:0;min-height:100vh;padding:28px;font-family:system-ui,-apple-system,"Segoe UI",sans-serif;background:#f5f7fb;color:#172033;display:grid;place-items:center}.card{width:100%;max-width:620px;background:#fff;border:1px solid #e5eaf2;border-radius:20px;padding:32px;box-shadow:0 16px 50px #17203310}.brand{color:#2563eb;font-size:12px;font-weight:800;letter-spacing:2px}.status{color:#64748b;font-size:14px;line-height:1.6}.detail{padding:14px 0;border-bottom:1px solid #edf0f5}.label{display:block;color:#64748b;font-size:12px;margin-bottom:5px}.value{font-weight:650;overflow-wrap:anywhere}button{margin-top:24px;border:0;border-radius:10px;background:#2563eb;color:white;padding:12px 18px;font-weight:700;font-size:14px;cursor:pointer}#message{color:#b42318;font-size:13px}
+  </style>
+</head>
+<body>
+  <main class="card">
+    <div class="brand">VOLUNTEER HUB</div>
+    <h1>Your account</h1>
+    <p class="status" id="status">Checking your sign-in session…</p>
+    <section id="account" hidden>
+      <div class="detail"><span class="label">Full name</span><span class="value" id="name"></span></div>
+      <div class="detail"><span class="label">Email address</span><span class="value" id="email"></span></div>
+      <div class="detail"><span class="label">Account type</span><span class="value" id="role"></span></div>
+      <button id="logout" type="button">Sign out</button>
+      <p id="message" role="status"></p>
+    </section>
+  </main>
+  <script>
+    const statusText = document.getElementById('status');
+    async function loadAccount() {
+      try {
+        const response = await fetch('/auth/me', { credentials: 'same-origin', cache: 'no-store' });
+        if (!response.ok) { location.replace('/templates/login.html'); return; }
+        const result = await response.json();
+        document.getElementById('name').textContent = result.user.name;
+        document.getElementById('email').textContent = result.user.email;
+        document.getElementById('role').textContent = result.user.role === 'organizer' ? 'Volunteer organizer' : 'Volunteer';
+        document.getElementById('account').hidden = false;
+        statusText.textContent = 'You are signed in.';
+      } catch {
+        statusText.textContent = 'We could not check your session. Please try again.';
+      }
+    }
+    document.getElementById('logout').addEventListener('click', async () => {
+      const button = document.getElementById('logout');
+      button.disabled = true;
+      try {
+        const response = await fetch('/auth/logout', { method: 'POST', credentials: 'same-origin' });
+        if (!response.ok) throw new Error('Sign-out failed. Please try again.');
+        location.replace('/templates/login.html');
+      } catch (error) {
+        document.getElementById('message').textContent = error.message;
+        button.disabled = false;
+      }
+    });
+    loadAccount();
+  </script>
+</body>
+</html>

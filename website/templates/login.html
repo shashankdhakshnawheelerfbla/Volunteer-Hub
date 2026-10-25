@@ -1,165 +1,97 @@
-
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
   <title>Log In | Volunteer Hub</title>
   <style>
-    * { box-sizing: border-box; }
-
-    body {
-      margin: 0;
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 24px;
-      font-family: Arial, sans-serif;
-      background: #f3f6fc;
-      color: #172033;
-    }
-
-    .card {
-      width: 100%;
-      max-width: 420px;
-      padding: 32px;
-      background: white;
-      border-radius: 20px;
-      box-shadow: 0 12px 40px #17203312;
-    }
-
-    .brand {
-      color: #2563eb;
-      font-size: 14px;
-      font-weight: bold;
-      letter-spacing: 2px;
-    }
-
-    h1 { margin-bottom: 8px; }
-
-    .description {
-      color: #64748b;
-      line-height: 1.6;
-      margin-bottom: 24px;
-    }
-
-    label {
-      display: block;
-      margin: 16px 0 8px;
-      font-weight: bold;
-      font-size: 14px;
-    }
-
-    input {
-      width: 100%;
-      padding: 13px;
-      border: 1px solid #cbd5e1;
-      border-radius: 9px;
-      font-size: 16px;
-    }
-
-    button, .google-button {
-      display: block;
-      width: 100%;
-      padding: 14px;
-      margin-top: 18px;
-      border: none;
-      border-radius: 9px;
-      font-size: 15px;
-      font-weight: bold;
-      text-align: center;
-      text-decoration: none;
-      cursor: pointer;
-    }
-
-    button {
-      background: #2563eb;
-      color: white;
-    }
-
-    .google-button {
-      margin-top: 12px;
-      border: 1px solid #cbd5e1;
-      background: white;
-      color: #172033;
-    }
-
-    .footer {
-      margin-top: 22px;
-      text-align: center;
-      font-size: 14px;
-    }
-
-    a { color: #2563eb; }
-
-    #message {
-      color: #64748b;
-      font-size: 13px;
-      line-height: 1.5;
-    }
+    :root { color-scheme: light; --blue:#2563eb; --ink:#172033; --muted:#64748b; --line:#dbe2ec; }
+    * { box-sizing:border-box; }
+    body { margin:0; min-height:100vh; display:grid; place-items:center; padding:24px; font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif; color:var(--ink); background:radial-gradient(ellipse at top left,#e6efff 0,transparent 45%),#f5f7fb; }
+    .card { width:100%; max-width:460px; padding:34px; background:#fff; border:1px solid #e8edf5; border-radius:22px; box-shadow:0 20px 65px #1e293b12; }
+    .brand { display:flex; align-items:center; gap:10px; font-size:12px; font-weight:800; letter-spacing:2px; color:var(--blue); }
+    .brand-mark { display:grid; place-items:center; width:34px; height:34px; border-radius:11px; color:#fff; background:var(--blue); letter-spacing:0; font-size:17px; }
+    h1 { margin:26px 0 8px; font-size:30px; letter-spacing:-.7px; }
+    .description { margin:0 0 24px; color:var(--muted); line-height:1.6; font-size:14px; }
+    label { display:block; margin:16px 0 8px; font-size:13px; font-weight:700; }
+    input { width:100%; padding:13px 14px; border:1px solid var(--line); border-radius:10px; font:inherit; font-size:15px; background:#fff; }
+    input:focus { outline:3px solid #2563eb20; border-color:var(--blue); }
+    button,.provider { width:100%; min-height:46px; display:flex; align-items:center; justify-content:center; gap:10px; padding:12px 14px; border:1px solid var(--line); border-radius:10px; font:inherit; font-size:14px; font-weight:700; text-decoration:none; cursor:pointer; transition:background .15s,border-color .15s; }
+    .primary { margin-top:20px; color:#fff; border-color:var(--blue); background:var(--blue); }
+    .primary:hover { background:#1d4ed8; }
+    .provider { color:var(--ink); background:#fff; }
+    .provider:hover { background:#f8fafc; border-color:#94a3b8; }
+    .provider-list { display:grid; gap:10px; margin-top:16px; }
+    .provider-icon { display:inline-grid; place-items:center; min-width:20px; font-size:17px; font-weight:800; }
+    .separator { display:flex; align-items:center; gap:12px; margin:20px 0 2px; color:#94a3b8; font-size:12px; }
+    .separator:before,.separator:after { content:""; height:1px; flex:1; background:#e8edf5; }
+    .footer { margin:24px 0 0; text-align:center; font-size:13px; color:var(--muted); }
+    a.text-link { color:var(--blue); font-weight:700; text-decoration:none; }
+    #message { min-height:18px; margin:16px 0 0; color:var(--muted); font-size:13px; line-height:1.5; }
+    #message.error { color:#b42318; }
+    button:disabled { opacity:.65; cursor:wait; }
+    @media(max-width:480px) { .card { padding:26px 21px; } h1 { font-size:27px; } }
   </style>
 </head>
 <body>
   <main class="card">
-    <div class="brand">VOLUNTEER HUB</div>
-
-    <h1>Welcome back!</h1>
-    <p class="description">
-      Sign in to discover opportunities and manage your volunteer activities.
-    </p>
+    <div class="brand"><span class="brand-mark" aria-hidden="true">V</span> VOLUNTEER HUB</div>
+    <h1>Welcome back</h1>
+    <p class="description">Sign in to discover opportunities and manage your volunteer activities.</p>
 
     <form id="login-form">
       <label for="email">Email address</label>
-      <input
-        id="email"
-        name="email"
-        type="email"
-        autocomplete="email"
-        placeholder="you@example.com"
-        required
-      >
-
+      <input id="email" name="email" type="email" autocomplete="username" placeholder="you@example.com" maxlength="254" required>
       <label for="password">Password</label>
-      <input
-        id="password"
-        name="password"
-        type="password"
-        autocomplete="current-password"
-        placeholder="Enter your password"
-        required
-      >
-
-      <button type="submit">Log In</button>
+      <input id="password" name="password" type="password" autocomplete="current-password" placeholder="Enter your password" required>
+      <button class="primary" id="login-submit" type="submit">Log in</button>
     </form>
 
-    <a class="google-button" href="/auth/google/start">
-      Continue with Google
-    </a>
+    <div class="separator">or continue with</div>
+    <div class="provider-list" aria-label="Other sign-in options">
+      <a class="provider" href="/auth/google/start"><span class="provider-icon" aria-hidden="true">G</span> Continue with Google</a>
+      <a class="provider" href="/auth/microsoft/start"><span class="provider-icon" aria-hidden="true">⊞</span> Continue with Microsoft</a>
+      <a class="provider" href="/auth/apple/start"><span class="provider-icon" aria-hidden="true">●</span> Continue with Apple</a>
+    </div>
 
-    <p class="footer">
-      Don't have an account?
-      <a href="/templates/signup.html">Sign up</a>
-    </p>
-
-    <p id="message" role="status">
-      Email and password sign-in must be connected to a secure backend.
-    </p>
+    <p class="footer">Don't have an account? <a class="text-link" href="/templates/signup.html">Create one</a></p>
+    <p id="message" role="status" aria-live="polite"></p>
   </main>
-
   <script>
-    const params = new URLSearchParams(window.location.search);
-
-    if (params.has("error")) {
-      document.getElementById("message").textContent =
-        "Google sign-in failed. Please try again.";
+    const form = document.getElementById('login-form');
+    const message = document.getElementById('message');
+    const submit = document.getElementById('login-submit');
+    const errorMessages = {
+      provider_not_configured: 'That sign-in provider is not configured yet. Please use email and password or try again later.',
+      account_exists: 'An account already exists with this email. Sign in with the method you originally used.',
+      provider_signin_failed: 'Sign-in was not completed. Please try again.',
+    };
+    const params = new URLSearchParams(location.search);
+    if (params.has('error')) {
+      message.textContent = errorMessages[params.get('error')] || 'Sign-in failed. Please try again.';
+      message.classList.add('error');
+      history.replaceState({}, document.title, location.pathname);
     }
-
-    document.getElementById("login-form").addEventListener("submit", event => {
+    form.addEventListener('submit', async (event) => {
       event.preventDefault();
-
-      document.getElementById("message").textContent =
-        "Email and password sign-in is not connected yet. Please use Google sign-in when it is configured.";
+      message.textContent = 'Signing you in…';
+      message.classList.remove('error');
+      submit.disabled = true;
+      try {
+        const response = await fetch('/auth/login', {
+          method: 'POST', credentials: 'same-origin',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email: form.email.value, password: form.password.value })
+        });
+        const result = await response.json();
+        if (!response.ok) throw new Error(result.error || 'Sign-in failed. Please try again.');
+        location.assign('/templates/dashboard.html');
+      } catch (error) {
+        message.textContent = error.message || 'We could not sign you in. Please try again.';
+        message.classList.add('error');
+        submit.disabled = false;
+      }
     });
   </script>
 </body>
