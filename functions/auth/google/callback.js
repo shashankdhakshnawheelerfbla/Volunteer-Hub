@@ -1,4 +1,5 @@
-// Keep the existing Google callback route compatible while using the shared OAuth handler.
+// Cloudflare Pages route: GET/POST /auth/google/callback
+// Google uses the shared callback validation, token exchange, and session logic.
 import { completeGoogleOAuth } from "../_oauth.js";
 
 export async function onRequestGet(context) {

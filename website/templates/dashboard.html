@@ -26,7 +26,8 @@
     async function loadAccount() {
       try {
         const response = await fetch('/auth/me', { credentials: 'same-origin', cache: 'no-store' });
-        if (!response.ok) { location.replace('/templates/login.html'); return; }
+        if (response.status === 401) { location.replace('/templates/login.html?error=session_expired'); return; }
+        if (!response.ok) throw new Error('Authentication service returned HTTP ' + response.status + '.');
         const result = await response.json();
         document.getElementById('name').textContent = result.user.name;
         document.getElementById('email').textContent = result.user.email;
@@ -41,7 +42,7 @@
       const button = document.getElementById('logout');
       button.disabled = true;
       try {
-        const response = await fetch('/auth/logout', { method: 'POST', credentials: 'same-origin' });
+        const response = await fetch('/auth/logout', { method: 'POST', credentials: 'same-origin', headers: { 'Content-Type': 'application/json' }, body: '{}' });
         if (!response.ok) throw new Error('Sign-out failed. Please try again.');
         location.replace('/templates/login.html');
       } catch (error) {

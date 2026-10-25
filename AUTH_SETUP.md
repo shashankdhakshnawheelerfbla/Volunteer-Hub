@@ -22,6 +22,21 @@ Copy these files into the matching paths in the existing repository:
 
 Do not replace `wrangler.json`; the current D1 binding and Pages output directory are preserved.
 
+
+## Important route fix in this bundle
+
+Cloudflare Pages needs a function at `functions/auth/google/start.js` for the exact URL `/auth/google/start`. This bundle adds that explicit route and sends it to the shared OAuth implementation. The route is not a local file and will not work when an HTML page is opened with a `file:///` URL. Use the deployed HTTPS site.
+
+## Check migration state before applying
+
+This bundle omits the old `0002_sessions.sql` no-op migration and its backup because the project already has `0002_authentication.sql` and duplicate `0002` prefixes can cause migration ordering/confusion. Before applying migrations, inspect the remote state:
+
+```powershell
+npx wrangler d1 migrations list volunteer-db --remote
+```
+
+If `0002_authentication.sql` and `0003_provider_auth.sql` are already applied, do not try to apply them again; verify the required tables (`password_credentials`, `auth_sessions`, `login_attempts`, `auth_profiles`, `provider_accounts`, `auth_rate_limits`) exist. If a migration is pending, apply the migrations with the command below and read the output carefully. Never delete or reset the production D1 database to fix authentication.
+
 ## 1. Apply the D1 migration
 
 From the repository folder in VS Code's terminal, run:

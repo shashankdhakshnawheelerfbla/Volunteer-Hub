@@ -147,11 +147,14 @@ async function getProviderIdentity(provider, tokens, expectedNonce, env) {
   if (!response.ok) throw new Error(`${provider} user info request failed`);
   const identity = await response.json();
   if (!identity.sub || !identity.email) throw new Error(`${provider} did not return a usable email identity`);
+  const emailVerified = provider === "google" && (identity.email_verified === true || identity.email_verified === "true");
+  // Do not create an account or link a password account unless Google confirms the email.
+  if (provider === "google" && !emailVerified) throw new Error("Google did not verify this email address");
   return {
     subject: String(identity.sub),
     email: String(identity.email).trim().toLowerCase(),
     name: typeof identity.name === "string" ? identity.name.trim() : "",
-    emailVerified: provider === "google" ? (identity.email_verified === true || identity.email_verified === "true") : false,
+    emailVerified,
   };
 }
 
