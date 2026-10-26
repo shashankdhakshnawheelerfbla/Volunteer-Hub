@@ -1,5 +1,6 @@
-﻿// PLACEHOLDER ONLY: email/password login is not implemented.
-// TODO: rate-limit, verify password hash, and create a secure server-side session.
+// PLACEHOLDER ONLY — login is not implemented.
+// Add rate limiting, password-hash verification, generic failure messages,
+// and secure server-side session creation before enabling this endpoint.
 export async function onRequest() {
   return new Response("Login is not implemented.", { status: 501 });
 }

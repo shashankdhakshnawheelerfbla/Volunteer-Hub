@@ -1,8 +1,5 @@
-# Volunteer-Hub Authentication Starter
+# Authentication endpoints — starter placeholders
 
-These are original starter placeholders, not a working authentication system.
+These files are scaffolding only. The JavaScript endpoints return HTTP 501 until authentication is implemented. Do not deploy them expecting sign-in to work.
 
-Implement and test password hashing, rate limiting, OAuth state and nonce validation,
-token verification, secure sessions, expiration, and logout invalidation before production.
-Store credentials in Cloudflare secrets. Never commit passwords or OAuth secrets.
-Do not automatically link accounts solely because email addresses match.
+Before implementation, plan and test: password hashing with a suitable password-hashing algorithm, input validation, rate limiting, secure and expiring server-side sessions, session invalidation on logout, OAuth state and nonce validation, provider token/signature validation, redirect URI allowlists, CSRF protection, and safe account-linking rules. Do not link accounts solely because email addresses match. Keep credentials in Cloudflare secrets.

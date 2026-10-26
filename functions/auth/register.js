@@ -1,5 +1,6 @@
-﻿// PLACEHOLDER ONLY: email/password registration is not implemented.
-// TODO: validate input, rate-limit, hash password, and create account securely.
+// PLACEHOLDER ONLY — registration is not implemented.
+// Add validation, rate limiting, secure password hashing, duplicate-account
+// handling, and safe session creation before enabling this endpoint.
 export async function onRequest() {
   return new Response("Registration is not implemented.", { status: 501 });
 }
