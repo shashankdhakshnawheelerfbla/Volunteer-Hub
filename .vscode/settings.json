@@ -1,16 +1,40 @@
+
 {
     "files.exclude": {
         "**/.vscode": true,
-        "**/sync_volunteer_hub.bat": true,
-        "**/.gitignore": true,
-        "**/README.md": true,
-        "**/style.css": false,
+        "**/.git": true,
         "**/git": true,
+        "**/.gitignore": true,
+        "**/README.md": false,
+        "**/README.txt": true,
+        "**/.venv": true,
+        "**/.venv-1": true,
+        "**/venv": true,
+        "**/__pycache__": true,
+        "**/python-flask": true,
+        "**/website": false,
+        "**/volunteerhub": true,
+        "**/VolunteerHub": true,
+        "**/Volunteer-Hub": true,
+        "**/Auth": true,
+        "**/auth": true,
+        "**/Google Auth": true,
+        "**/Google-Auth": true,
+        "**/Microsoft Auth": true,
+        "**/Microsoft-Auth": true,
+        "**/Capsule": true,
+        "**/Cloudflare": true,
+        "**/cloudflare": true,
+        "**/.wrangler": true,
+        "**/wrangler.json": true,
+        "**/wrangler.toml": true,
+        "**/.env": true,
+        "**/.env.*": true,
+        "**/node_modules": true,
+        "**/sync_volunteer_hub.bat": true,
         "**/start_auto_sync.bat": true,
         "**/watch_volunteer_hub.ps1": true,
-        "**/README.txt": true
-        "**/.venv": false,
-        "**/.venv-1": false,
-        "**/ai_commit_message.py" false
+        "**/style.css": false,
+        "**/ai_commit_message.py": true
     }
 }
