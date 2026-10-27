@@ -1,21 +1,970 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Volunteer Hub helps people discover volunteer opportunities, organize events, and make a difference in their communities.">
+    <title>Volunteer Hub | Make a Difference Together</title>
+
     <!-- 🔴 DO NOT EDIT THIS PART: GOOGLE SEARCH CONSOLE VERIFICATION -->
     <meta name="google-site-verification" content="I1ajjSG29WPJS1-atSibX11QN-doXn1M729xVM5q7tI" />
     <!-- 🔴 END OF PROTECTED SECTION -->
 
     <!-- ===== START REGULAR HEAD CODE HERE ===== -->
+    <meta name="theme-color" content="#2563eb">
 
+    <style>
+        :root {
+            --blue: #2563eb;
+            --blue-dark: #1d4ed8;
+            --navy: #14213d;
+            --ink: #1f2937;
+            --muted: #64748b;
+            --pale: #eff6ff;
+            --line: #e2e8f0;
+            --white: #ffffff;
+            --radius: 18px;
+            --shadow: 0 12px 35px rgba(15, 23, 42, .08);
+        }
 
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            margin: 0;
+            font-family: Inter, system-ui, -apple-system, "Segoe UI", sans-serif;
+            color: var(--ink);
+            background: #f8fafc;
+            line-height: 1.6;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        button,
+        input {
+            font: inherit;
+        }
+
+        button,
+        .button {
+            cursor: pointer;
+        }
+
+        .container {
+            width: min(1120px, calc(100% - 40px));
+            margin: 0 auto;
+        }
+
+        .topbar {
+            background: var(--navy);
+            color: white;
+            text-align: center;
+            padding: 8px 16px;
+            font-size: .9rem;
+        }
+
+        header {
+            background: rgba(255, 255, 255, .96);
+            border-bottom: 1px solid var(--line);
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        .nav {
+            min-height: 76px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 24px;
+        }
+
+        .brand {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 800;
+            font-size: 1.25rem;
+            color: var(--navy);
+            white-space: nowrap;
+        }
+
+        .brand-mark {
+            display: grid;
+            place-items: center;
+            width: 38px;
+            height: 38px;
+            color: white;
+            background: var(--blue);
+            border-radius: 12px;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 24px;
+            color: #475569;
+            font-size: .95rem;
+        }
+
+        .nav-links a:hover,
+        .text-link:hover {
+            color: var(--blue);
+        }
+
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid transparent;
+            border-radius: 11px;
+            padding: 11px 17px;
+            font-weight: 700;
+            transition: transform .15s, background .15s;
+        }
+
+        .button:hover {
+            transform: translateY(-1px);
+        }
+
+        .button-primary {
+            color: white;
+            background: var(--blue);
+        }
+
+        .button-primary:hover {
+            background: var(--blue-dark);
+        }
+
+        .button-outline {
+            background: white;
+            color: var(--navy);
+            border-color: var(--line);
+        }
+
+        .hero {
+            padding: 76px 0 66px;
+            background:
+                radial-gradient(circle at 85% 20%, #dbeafe 0, transparent 30%),
+                linear-gradient(135deg, #f8fbff, #eff6ff);
+        }
+
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1.1fr .9fr;
+            align-items: center;
+            gap: 54px;
+        }
+
+        .eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 7px 12px;
+            border-radius: 999px;
+            background: #dbeafe;
+            color: #1d4ed8;
+            font-weight: 700;
+            font-size: .84rem;
+        }
+
+        h1,
+        h2,
+        h3,
+        p {
+            margin-top: 0;
+        }
+
+        h1 {
+            color: var(--navy);
+            font-size: clamp(2.5rem, 5vw, 4.3rem);
+            line-height: 1.06;
+            letter-spacing: -.045em;
+            margin: 20px 0;
+        }
+
+        h1 span {
+            color: var(--blue);
+        }
+
+        .hero-copy {
+            max-width: 600px;
+            color: #526174;
+            font-size: 1.12rem;
+        }
+
+        .hero-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin: 26px 0 24px;
+        }
+
+        .trust-note {
+            color: var(--muted);
+            font-size: .9rem;
+        }
+
+        .hero-art {
+            min-height: 340px;
+            border-radius: 28px;
+            background: linear-gradient(145deg, #bfdbfe, #e0f2fe 52%, #dcfce7);
+            padding: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .art-card {
+            position: relative;
+            z-index: 1;
+            width: min(100%, 350px);
+            background: white;
+            border-radius: 20px;
+            padding: 22px;
+            box-shadow: 0 22px 55px rgba(30, 64, 175, .14);
+            transform: rotate(-2deg);
+        }
+
+        .art-card h3 {
+            margin-bottom: 6px;
+            color: var(--navy);
+        }
+
+        .art-card p {
+            color: var(--muted);
+            font-size: .9rem;
+            margin-bottom: 16px;
+        }
+
+        .event-row {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+            padding: 12px 0;
+            border-top: 1px solid var(--line);
+        }
+
+        .event-icon {
+            width: 44px;
+            height: 44px;
+            flex: 0 0 44px;
+            display: grid;
+            place-items: center;
+            border-radius: 12px;
+            background: var(--pale);
+            font-size: 1.3rem;
+        }
+
+        .event-row strong {
+            display: block;
+            font-size: .94rem;
+        }
+
+        .event-row small {
+            color: var(--muted);
+        }
+
+        section {
+            padding: 70px 0;
+        }
+
+        .section-heading {
+            display: flex;
+            justify-content: space-between;
+            align-items: end;
+            gap: 24px;
+            margin-bottom: 28px;
+        }
+
+        .section-heading h2 {
+            color: var(--navy);
+            font-size: clamp(1.8rem, 3vw, 2.5rem);
+            letter-spacing: -.03em;
+            margin-bottom: 8px;
+        }
+
+        .section-heading p {
+            color: var(--muted);
+            margin-bottom: 0;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+            margin-top: 34px;
+        }
+
+        .stat {
+            background: white;
+            border: 1px solid var(--line);
+            border-radius: 15px;
+            padding: 18px;
+        }
+
+        .stat strong {
+            display: block;
+            color: var(--navy);
+            font-size: 1.3rem;
+        }
+
+        .stat span {
+            color: var(--muted);
+            font-size: .9rem;
+        }
+
+        .opportunities {
+            background: white;
+        }
+
+        .filters {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 22px;
+        }
+
+        .filter-button {
+            border: 1px solid var(--line);
+            background: white;
+            border-radius: 999px;
+            padding: 8px 14px;
+            color: #475569;
+        }
+
+        .filter-button[aria-pressed="true"] {
+            background: var(--navy);
+            border-color: var(--navy);
+            color: white;
+        }
+
+        .search-row {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 24px;
+        }
+
+        .search-row input {
+            width: 100%;
+            min-width: 0;
+            border: 1px solid #cbd5e1;
+            border-radius: 11px;
+            padding: 12px 14px;
+            background: white;
+        }
+
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 18px;
+        }
+
+        .opportunity-card {
+            border: 1px solid var(--line);
+            border-radius: var(--radius);
+            padding: 22px;
+            background: white;
+            display: flex;
+            flex-direction: column;
+            min-height: 260px;
+        }
+
+        .tag {
+            align-self: flex-start;
+            padding: 5px 10px;
+            border-radius: 999px;
+            background: #dcfce7;
+            color: #166534;
+            font-size: .78rem;
+            font-weight: 750;
+        }
+
+        .opportunity-card h3 {
+            color: var(--navy);
+            margin: 15px 0 8px;
+        }
+
+        .opportunity-card p {
+            color: var(--muted);
+            font-size: .94rem;
+        }
+
+        .card-meta {
+            margin-top: auto;
+            padding-top: 14px;
+            color: #475569;
+            font-size: .88rem;
+        }
+
+        .card-meta span {
+            display: block;
+            margin-top: 5px;
+        }
+
+        .empty-state {
+            color: var(--muted);
+            padding: 25px 0;
+        }
+
+        .steps {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 22px;
+        }
+
+        .step {
+            padding: 24px;
+            background: white;
+            border: 1px solid var(--line);
+            border-radius: var(--radius);
+        }
+
+        .step-number {
+            display: grid;
+            place-items: center;
+            width: 42px;
+            height: 42px;
+            border-radius: 13px;
+            background: var(--pale);
+            color: var(--blue);
+            font-weight: 800;
+            margin-bottom: 16px;
+        }
+
+        .step h3 {
+            color: var(--navy);
+            margin-bottom: 8px;
+        }
+
+        .step p {
+            color: var(--muted);
+            margin-bottom: 0;
+        }
+
+        .cta {
+            padding: 0 0 70px;
+        }
+
+        .cta-panel {
+            background: var(--navy);
+            color: white;
+            border-radius: 24px;
+            padding: 42px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 24px;
+        }
+
+        .cta-panel h2 {
+            font-size: clamp(1.7rem, 3vw, 2.4rem);
+            margin-bottom: 8px;
+        }
+
+        .cta-panel p {
+            color: #cbd5e1;
+            margin-bottom: 0;
+        }
+
+        .cta-panel .button {
+            background: white;
+            color: var(--navy);
+            white-space: nowrap;
+        }
+
+        footer {
+            background: white;
+            border-top: 1px solid var(--line);
+            padding: 28px 0;
+            color: var(--muted);
+            font-size: .9rem;
+        }
+
+        .footer-inner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .footer-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 18px;
+        }
+
+        @media (max-width: 850px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hero-grid {
+                grid-template-columns: 1fr;
+                gap: 32px;
+            }
+
+            .hero {
+                padding-top: 52px;
+            }
+
+            .hero-art {
+                min-height: 300px;
+            }
+
+            .cards {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .steps {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 560px) {
+            .container {
+                width: calc(100% - 28px);
+            }
+
+            .nav {
+                min-height: 66px;
+            }
+
+            .brand {
+                font-size: 1.05rem;
+            }
+
+            .nav-actions .button-outline {
+                display: none;
+            }
+
+            .hero {
+                padding: 42px 0;
+            }
+
+            section {
+                padding: 52px 0;
+            }
+
+            .cards,
+            .stats {
+                grid-template-columns: 1fr;
+            }
+
+            .section-heading {
+                align-items: start;
+                flex-direction: column;
+            }
+
+            .search-row {
+                flex-direction: column;
+            }
+
+            .cta-panel {
+                padding: 28px;
+                align-items: flex-start;
+                flex-direction: column;
+            }
+        }
+    </style>
     <!-- ===== END REGULAR HEAD CODE HERE ===== -->
 </head>
-<body>
 
+<body>
     <!-- ===== START BODY CODE HERE ===== -->
 
+    <div class="topbar">
+        Small acts of service can make a big difference.
+    </div>
+
+    <header>
+        <div class="container nav">
+            <a class="brand" href="#home" aria-label="Volunteer Hub home">
+                <span class="brand-mark" aria-hidden="true">✦</span>
+                <span>Volunteer Hub</span>
+            </a>
+
+            <nav class="nav-links" aria-label="Main navigation">
+                <a href="#opportunities">Find opportunities</a>
+                <a href="#how-it-works">How it works</a>
+                <a href="#about">About</a>
+            </nav>
+
+            <div class="nav-actions">
+                <a class="button button-outline" href="login.html">Log in</a>
+                <a class="button button-primary" href="signup.html">Get started</a>
+            </div>
+        </div>
+    </header>
+
+    <main id="home">
+        <section class="hero">
+            <div class="container hero-grid">
+                <div>
+                    <span class="eyebrow">✦ Find your way to give back</span>
+
+                    <h1>
+                        Make a difference.<br>
+                        <span>One hour at a time.</span>
+                    </h1>
+
+                    <p class="hero-copy">
+                        Discover volunteer opportunities, connect with local causes,
+                        and find a way to help that fits your interests and schedule.
+                    </p>
+
+                    <div class="hero-actions">
+                        <a class="button button-primary" href="#opportunities">
+                            Explore opportunities →
+                        </a>
+
+                        <a class="button button-outline" href="signup.html">
+                            Create an account
+                        </a>
+                    </div>
+
+                    <p class="trust-note">
+                        A simple place to discover ways to help your community.
+                    </p>
+
+                    <div class="stats" aria-label="Volunteer Hub highlights">
+                        <div class="stat">
+                            <strong>Discover</strong>
+                            <span>Causes you care about</span>
+                        </div>
+
+                        <div class="stat">
+                            <strong>Connect</strong>
+                            <span>With community groups</span>
+                        </div>
+
+                        <div class="stat">
+                            <strong>Contribute</strong>
+                            <span>On a schedule that fits</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="hero-art" aria-label="Example volunteer opportunity preview">
+                    <div class="art-card">
+                        <h3>Your next opportunity</h3>
+                        <p>There are many ways to lend a hand.</p>
+
+                        <div class="event-row">
+                            <div class="event-icon" aria-hidden="true">🌳</div>
+                            <div>
+                                <strong>Community clean-up</strong>
+                                <small>Outdoor service · Flexible</small>
+                            </div>
+                        </div>
+
+                        <div class="event-row">
+                            <div class="event-icon" aria-hidden="true">📚</div>
+                            <div>
+                                <strong>Reading buddy</strong>
+                                <small>Education · Weekly</small>
+                            </div>
+                        </div>
+
+                        <div class="event-row">
+                            <div class="event-icon" aria-hidden="true">🥫</div>
+                            <div>
+                                <strong>Food pantry support</strong>
+                                <small>Community care · Weekends</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="opportunities" id="opportunities">
+            <div class="container">
+                <div class="section-heading">
+                    <div>
+                        <h2>Find an opportunity</h2>
+                        <p>
+                            Explore example opportunities and filter by the type
+                            of service you enjoy.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="search-row">
+                    <input
+                        id="opportunity-search"
+                        type="search"
+                        placeholder="Search opportunities..."
+                        aria-label="Search opportunities"
+                    >
+
+                    <a class="button button-primary" href="signup.html">
+                        Join Volunteer Hub
+                    </a>
+                </div>
+
+                <div class="filters" role="group" aria-label="Filter opportunities">
+                    <button class="filter-button" type="button"
+                        data-filter="all" aria-pressed="true">All causes</button>
+
+                    <button class="filter-button" type="button"
+                        data-filter="environment" aria-pressed="false">Environment</button>
+
+                    <button class="filter-button" type="button"
+                        data-filter="education" aria-pressed="false">Education</button>
+
+                    <button class="filter-button" type="button"
+                        data-filter="community" aria-pressed="false">Community</button>
+                </div>
+
+                <div class="cards" id="opportunity-cards">
+                    <article class="opportunity-card" data-category="environment">
+                        <span class="tag">Environment</span>
+                        <h3>Neighborhood clean-up</h3>
+                        <p>
+                            Help care for shared outdoor spaces and make local parks
+                            more welcoming.
+                        </p>
+                        <div class="card-meta">
+                            <span>📍 Local parks and neighborhoods</span>
+                            <span>🗓 Flexible group dates</span>
+                        </div>
+                    </article>
+
+                    <article class="opportunity-card" data-category="education">
+                        <span class="tag">Education</span>
+                        <h3>Reading and homework buddy</h3>
+                        <p>
+                            Support younger learners with reading practice,
+                            study skills, and encouragement.
+                        </p>
+                        <div class="card-meta">
+                            <span>📍 School or community center</span>
+                            <span>🗓 Weekly opportunities</span>
+                        </div>
+                    </article>
+
+                    <article class="opportunity-card" data-category="community">
+                        <span class="tag">Community</span>
+                        <h3>Food pantry helper</h3>
+                        <p>
+                            Help sort donations, prepare supplies, or welcome
+                            visitors at a community pantry.
+                        </p>
+                        <div class="card-meta">
+                            <span>📍 Community food programs</span>
+                            <span>🗓 Weekday and weekend shifts</span>
+                        </div>
+                    </article>
+
+                    <article class="opportunity-card" data-category="community">
+                        <span class="tag">Community</span>
+                        <h3>Community event support</h3>
+                        <p>
+                            Help organizers prepare materials, guide guests,
+                            and keep local events running smoothly.
+                        </p>
+                        <div class="card-meta">
+                            <span>📍 Local events</span>
+                            <span>🗓 Event-based shifts</span>
+                        </div>
+                    </article>
+
+                    <article class="opportunity-card" data-category="environment">
+                        <span class="tag">Environment</span>
+                        <h3>Community garden day</h3>
+                        <p>
+                            Pitch in with planting, garden care, and projects
+                            that bring neighbors together.
+                        </p>
+                        <div class="card-meta">
+                            <span>📍 Community gardens</span>
+                            <span>🗓 Seasonal sessions</span>
+                        </div>
+                    </article>
+
+                    <article class="opportunity-card" data-category="education">
+                        <span class="tag">Education</span>
+                        <h3>Library activity helper</h3>
+                        <p>
+                            Assist with approved library activities, reading
+                            events, and learning resources.
+                        </p>
+                        <div class="card-meta">
+                            <span>📍 Public or school libraries</span>
+                            <span>🗓 Scheduled events</span>
+                        </div>
+                    </article>
+                </div>
+
+                <p class="empty-state" id="no-results" hidden>
+                    No matching examples. Try another search or category.
+                </p>
+
+                <p class="trust-note" style="margin-top: 18px;">
+                    These are sample listings for the page design, not verified
+                    or live volunteer openings.
+                </p>
+            </div>
+        </section>
+
+        <section id="how-it-works">
+            <div class="container">
+                <div class="section-heading">
+                    <div>
+                        <h2>Getting started is simple</h2>
+                        <p>
+                            A clear path from finding a cause to getting involved.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="steps">
+                    <article class="step">
+                        <div class="step-number">1</div>
+                        <h3>Explore causes</h3>
+                        <p>
+                            Browse opportunities and find service areas that
+                            match your interests.
+                        </p>
+                    </article>
+
+                    <article class="step">
+                        <div class="step-number">2</div>
+                        <h3>Create your profile</h3>
+                        <p>
+                            Set up an account so your volunteer activity can
+                            be organized in one place.
+                        </p>
+                    </article>
+
+                    <article class="step">
+                        <div class="step-number">3</div>
+                        <h3>Get involved</h3>
+                        <p>
+                            Follow the organizer's instructions and confirm
+                            details before attending an event.
+                        </p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section id="about" style="padding-top: 0;">
+            <div class="container">
+                <div class="cta-panel">
+                    <div>
+                        <h2>Ready to make a difference?</h2>
+                        <p>
+                            Start exploring and find a cause worth showing up for.
+                        </p>
+                    </div>
+
+                    <a class="button" href="signup.html">
+                        Create your account →
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container footer-inner">
+            <a class="brand" href="#home">
+                <span class="brand-mark" aria-hidden="true">✦</span>
+                <span>Volunteer Hub</span>
+            </a>
+
+            <span>
+                © <span id="current-year"></span> Volunteer Hub.
+                Built to help communities connect.
+            </span>
+
+            <div class="footer-links">
+                <a href="#opportunities">Opportunities</a>
+                <a href="#how-it-works">How it works</a>
+                <a href="login.html">Log in</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // This page currently uses sample opportunities.
+        // Clerk authentication must be connected separately.
+
+        const searchInput = document.getElementById("opportunity-search");
+        const filterButtons = [
+            ...document.querySelectorAll("[data-filter]")
+        ];
+        const opportunityCards = [
+            ...document.querySelectorAll(".opportunity-card")
+        ];
+        const noResults = document.getElementById("no-results");
+
+        let activeFilter = "all";
+
+        function updateOpportunities() {
+            const query = searchInput.value.trim().toLowerCase();
+            let visibleCount = 0;
+
+            opportunityCards.forEach((card) => {
+                const categoryMatches =
+                    activeFilter === "all" ||
+                    card.dataset.category === activeFilter;
+
+                const textMatches =
+                    card.textContent.toLowerCase().includes(query);
+
+                const visible = categoryMatches && textMatches;
+
+                card.hidden = !visible;
+
+                if (visible) {
+                    visibleCount++;
+                }
+            });
+
+            noResults.hidden = visibleCount !== 0;
+        }
+
+        filterButtons.forEach((button) => {
+            button.addEventListener("click", () => {
+                activeFilter = button.dataset.filter;
+
+                filterButtons.forEach((item) => {
+                    item.setAttribute(
+                        "aria-pressed",
+                        String(item === button)
+                    );
+                });
+
+                updateOpportunities();
+            });
+        });
+
+        searchInput.addEventListener("input", updateOpportunities);
+
+        document.getElementById("current-year").textContent =
+            new Date().getFullYear();
+    </script>
 
     <!-- ===== END BODY CODE HERE ===== -->
-
 </body>
 </html>
