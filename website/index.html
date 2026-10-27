@@ -1,17 +1,50 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Volunteer Hub helps people discover volunteer opportunities, organize events, and make a difference in their communities.">
+    <meta name="theme-color" content="#2563eb">
+
     <title>Volunteer Hub | Make a Difference Together</title>
 
-    <!-- 🔴 DO NOT EDIT THIS PART: GOOGLE SEARCH CONSOLE VERIFICATION -->
-    <meta name="google-site-verification" content="I1ajjSG29WPJS1-atSibX11QN-doXn1M729xVM5q7tI" />
-    <!-- 🔴 END OF PROTECTED SECTION -->
+    <!-- ================================================== -->
+    <!-- 🔴 PROTECTED GOOGLE CODE: DO NOT EDIT              -->
+    <!-- ================================================== -->
 
-    <!-- ===== START REGULAR HEAD CODE HERE ===== -->
-    <meta name="theme-color" content="#2563eb">
+    <!-- Google Search Console Verification -->
+    <meta
+        name="google-site-verification"
+        content="I1ajjSG29WPJS1-atSibX11QN-doXn1M729xVM5q7tI"
+    />
+
+    <!-- Google Tag Manager: GTM-PKCH3M6V -->
+    <script>
+        (function(w,d,s,l,i){
+            w[l]=w[l]||[];
+            w[l].push({
+                'gtm.start': new Date().getTime(),
+                event: 'gtm.js'
+            });
+            var f=d.getElementsByTagName(s)[0],
+                j=d.createElement(s),
+                dl=l!='dataLayer'?'&l='+l:'';
+            j.async=true;
+            j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;
+            f.parentNode.insertBefore(j,f);
+        })(window,document,'script','dataLayer','GTM-PKCH3M6V');
+    </script>
+
+    <!-- Google Analytics Measurement ID: G-G618PBXMP7 -->
+    <!-- Configure this Google tag in Google Tag Manager. -->
+    <!-- Avoid adding a second standalone Analytics script. -->
+
+    <!-- ================================================== -->
+    <!-- 🔴 END PROTECTED GOOGLE HEAD CODE                  -->
+    <!-- ================================================== -->
+
+    <!-- ===== START REGULAR WEBSITE HEAD CODE HERE ===== -->
 
     <style>
         :root {
@@ -386,6 +419,10 @@
             min-height: 260px;
         }
 
+        .opportunity-card[hidden] {
+            display: none;
+        }
+
         .tag {
             align-self: flex-start;
             padding: 5px 10px;
@@ -584,21 +621,28 @@
             }
         }
     </style>
-    <!-- ===== END REGULAR HEAD CODE HERE ===== -->
-     
-    <!-- Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-G618PBXMP7"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-        gtag('config', 'G-G618PBXMP7');
-    </script>
-    <!-- End Google Analytics -->
 
+    <!-- ===== END REGULAR WEBSITE HEAD CODE HERE ===== -->
 </head>
 
 <body>
+    <!-- ================================================== -->
+    <!-- 🔴 PROTECTED GOOGLE TAG MANAGER BODY CODE          -->
+    <!-- Keep this immediately after the opening body tag.  -->
+    <!-- ================================================== -->
+
+    <noscript>
+        <iframe
+            src="https://www.googletagmanager.com/ns.html?id=GTM-PKCH3M6V"
+            height="0"
+            width="0"
+            style="display:none;visibility:hidden"
+            title="Google Tag Manager"
+        ></iframe>
+    </noscript>
+
+    <!-- 🔴 END PROTECTED GOOGLE BODY CODE -->
+
     <!-- ===== START BODY CODE HERE ===== -->
 
     <div class="topbar">
@@ -921,12 +965,15 @@
         // Clerk authentication must be connected separately.
 
         const searchInput = document.getElementById("opportunity-search");
+
         const filterButtons = [
             ...document.querySelectorAll("[data-filter]")
         ];
+
         const opportunityCards = [
             ...document.querySelectorAll(".opportunity-card")
         ];
+
         const noResults = document.getElementById("no-results");
 
         let activeFilter = "all";
