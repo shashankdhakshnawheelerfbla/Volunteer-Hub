@@ -1,0 +1,14 @@
+{
+	"$schema": "node_modules/wrangler/config-schema.json",
+	"name": "volunteer-hub",
+	"compatibility_date": "2026-10-27",
+	"pages_build_output_dir": "./website",
+	"d1_databases": [
+		{
+			"binding": "volunteer_hub_social_accounts",
+			"database_name": "volunteer-hub-social-accounts",
+			"database_id": "0f5b342e-374a-414e-abe4-a5603b0aabe4",
+			"remote": true
+		}
+	]
+}
