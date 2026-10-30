@@ -12,7 +12,7 @@
         "**/migrations": true,
         "**/python-flask": false,
         "**/website": false,
-        "**/.gitignore": true,
+        "**/.gitignore": false,
         "**/ai_commit_message.py": true,
         "**/database-test-data.example.sql": true,
         "**/database-verification-report-*": true,

@@ -10,3 +10,5 @@
 *.key
 secrets.local
 secrets.local.*
+# Ignore VolunteerHub database verification script
+VolunteerHub-Database-Verification-Corrected.ps1
