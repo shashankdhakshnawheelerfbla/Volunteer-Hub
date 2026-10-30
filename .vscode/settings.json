@@ -8,10 +8,10 @@
         "**/.cloudflare": true,
         "**/database-backup-20261027-221402": true,
         "**/database-new": true,
-        "**/functions": true,
-        "**/migrations": true,
-        "**/python-flask": true,
-        "**/website": true,
+        "**/functions": false,
+        "**/migrations": false,
+        "**/python-flask": false,
+        "**/website": false,
         "**/.gitignore": true,
         "**/ai_commit_message.py": true,
         "**/database-test-data.example.sql": true,
@@ -27,7 +27,7 @@
         "**/sage.py": true,
         "**/schema.sql": true,
         "**/social-accounts-schema.sql": true,
-        "**/Volunteer Hub.pptx": true,
+        "**/Volunteer Hub.pptx": false,
         "**/VolunteerHub-Database-Verification-Correc*": true,
         "**/google0b08dede38c9b155.html": true,
         "**/package-lock.json": true,
@@ -35,5 +35,7 @@
         "**/README.md": true,
         "**/requirements.txt": true,
         "**/cloudflare": true,
+        "**/functions/api": true,
+        "**/functions/_utils": true
     }
 }
