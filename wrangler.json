@@ -14,6 +14,12 @@
       "database_id": "0f5b342e-374a-414e-abe4-a5603b0aabe4",
       "database_name": "volunteer-hub-social-accounts",
       "binding": "SOCIAL_ACCOUNTS"
+    },
+    {
+      "migrations_dir": "migrations/service-hours",
+      "database_name": "volunteer-hours-db",
+      "database_id": "7f6cad28-ff2d-415d-a030-9cefc0829b30",
+      "binding": "HOURS_DB"
     }
   ]
 }

@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Volunteer Hub | Service Hours Report</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            padding: 30px 15px;
+            font-family: Arial, sans-serif;
+            background: #f3f5f9;
+            color: #263238;
+        }
+
+        .report-container {
+            max-width: 850px;
+            margin: auto;
+            padding: 35px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 3px 15px rgba(0,0,0,.08);
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        header h1 {
+            color: #174b72;
+        }
+
+        header p {
+            color: #64748b;
+        }
+
+        .section {
+            margin-top: 28px;
+            padding: 20px;
+            border: 1px solid #dce3eb;
+            border-radius: 8px;
+        }
+
+        .section h2 {
+            margin-top: 0;
+            color: #174b72;
+            font-size: 19px;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 18px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .full-width {
+            grid-column: 1 / -1;
+        }
+
+        label {
+            margin-bottom: 7px;
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        input, textarea, select {
+            width: 100%;
+            padding: 11px;
+            border: 1px solid #cbd5e1;
+            border-radius: 6px;
+            font-size: 14px;
+            font-family: Arial, sans-serif;
+        }
+
+        textarea {
+            min-height: 90px;
+            resize: vertical;
+        }
+
+        .hint {
+            margin-top: 6px;
+            color: #64748b;
+            font-size: 12px;
+        }
+
+        .approval-notice {
+            padding: 14px;
+            margin-top: 15px;
+            background: #fff7e6;
+            border-left: 4px solid #e3a326;
+            border-radius: 5px;
+            font-size: 13px;
+            line-height: 1.6;
+        }
+
+        .button-container {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-top: 28px;
+        }
+
+        button {
+            padding: 12px 22px;
+            border: none;
+            border-radius: 6px;
+            background: #174b72;
+            color: white;
+            font-size: 14px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #103752;
+        }
+
+        .reset-button {
+            background: #64748b;
+        }
+
+        footer {
+            margin-top: 30px;
+            padding-top: 18px;
+            border-top: 1px solid #dce3eb;
+            color: #64748b;
+            font-size: 12px;
+            line-height: 1.6;
+            text-align: center;
+        }
+
+        @media (max-width: 600px) {
+            .report-container {
+                padding: 20px;
+            }
+
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .full-width {
+                grid-column: auto;
+            }
+
+            .button-container {
+                flex-direction: column;
+            }
+        }
+
+        @media print {
+            body {
+                padding: 0;
+                background: white;
+            }
+
+            .report-container {
+                max-width: 100%;
+                padding: 10px;
+                box-shadow: none;
+            }
+
+            .button-container {
+                display: none;
+            }
+
+            .section {
+                break-inside: avoid;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <main class="report-container">
+
+        <header>
+            <h1>Volunteer Hub</h1>
+            <h2>Student Community Service Hours Report</h2>
+            <p>Service Activity Submission and Approval Form</p>
+        </header>
+
+        <form id="hoursReport">
+
+            <section class="section">
+                <h2>1. Adult Sponsor / Event Coordinator Information</h2>
+
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="sponsorLastName">Adult Sponsor Last Name *</label>
+                        <input id="sponsorLastName" name="sponsorLastName" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="sponsorFirstName">Adult Sponsor First Name *</label>
+                        <input id="sponsorFirstName" name="sponsorFirstName" required>
+                    </div>
+
+                    <div class="form-group full-width">
+                        <label for="sponsorEmail">Adult Sponsor E-mail Address *</label>
+                        <input type="email" id="sponsorEmail" name="sponsorEmail" required>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section">
+                <h2>2. Student Information</h2>
+
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="studentLastName">Your Last Name *</label>
+                        <input id="studentLastName" name="studentLastName" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="studentFirstName">Your First Name *</label>
+                        <input id="studentFirstName" name="studentFirstName" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="studentEmail">Your E-mail Address *</label>
+                        <input type="email" id="studentEmail" name="studentEmail" required>
+                        <span class="hint">
+                            Please enter a valid E-mail that you check regularly.
+                        </span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="studentId">Student ID *</label>
+                        <input id="studentId" name="studentId" required>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section">
+                <h2>3. Service Activity Information</h2>
+
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="serviceDate">Date of Service Activity *</label>
+                        <input type="date" id="serviceDate" name="serviceDate" required>
+                        <span class="hint">Date format: MM/DD/YYYY</span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="claimedHours">Number of Hours You Are Claiming *</label>
+                        <input
+                            type="number"
+                            id="claimedHours"
+                            name="claimedHours"
+                            min="0.25"
+                            max="24"
+                            step="0.25"
+                            placeholder="Example: 1.25"
+                            required
+                        >
+                        <span class="hint">
+                            Round to the nearest quarter hour.
+                            Example: 1 hour 15 minutes = 1.25 hours.
+                        </span>
+                    </div>
+
+                    <div class="form-group full-width">
+                        <label for="activityDescription">
+                            Description of Service Activity *
+                        </label>
+                        <textarea
+                            id="activityDescription"
+                            name="activityDescription"
+                            placeholder="Example: Shop With a Wildcat"
+                            required
+                        ></textarea>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section">
+                <h2>4. Adult Sponsor / Event Coordinator Approval</h2>
+
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="approvedHours">Approved Hours</label>
+                        <input
+                            type="number"
+                            id="approvedHours"
+                            name="approvedHours"
+                            min="0"
+                            max="24"
+                            step="0.25"
+                            placeholder="Coordinator enters hours"
+                            disabled
+                        >
+                    </div>
+
+                    <div class="form-group">
+                        <label for="approvalDate">Approval Date</label>
+                        <input type="date" id="approvalDate" name="approvalDate" disabled>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="approvalStatus">Approval Status</label>
+                        <select id="approvalStatus" name="approvalStatus" disabled>
+                            <option value="Pending">Pending</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="coordinatorSignature">
+                            Adult Sponsor / Event Coordinator Signature
+                        </label>
+                        <input
+                            id="coordinatorSignature"
+                            name="coordinatorSignature"
+                            placeholder="Completed by coordinator"
+                            disabled
+                        >
+                    </div>
+                </div>
+
+                <div class="approval-notice">
+                    <strong>Coordinator approval required:</strong>
+                    The adult sponsor/event coordinator must review the
+                    submitted hours. Students cannot approve their own
+                    hours. Only approved hours count toward the student's
+                    approved service-hour total.
+                </div>
+            </section>
+
+            <div class="button-container">
+                <button type="button" onclick="printReport()">
+                    Print / Save as PDF
+                </button>
+
+                <button type="reset" class="reset-button">
+                    Clear Form
+                </button>
+            </div>
+        </form>
+
+        <footer>
+            <p>Volunteer Hub Service Hours Report</p>
+            <p>
+                Claimed hours are not necessarily approved hours.
+                Only hours reviewed and approved by the adult sponsor
+                / event coordinator count as approved service hours.
+            </p>
+        </footer>
+    </main>
+
+    <script>
+        function printReport() {
+            const form = document.getElementById("hoursReport");
+
+            if (!form.reportValidity()) {
+                return;
+            }
+
+            const hours = Number(
+                document.getElementById("claimedHours").value
+            );
+
+            if (hours % 0.25 !== 0) {
+                alert("Please enter hours in quarter-hour increments.");
+                return;
+            }
+
+            window.print();
+        }
+    </script>
+</body>
+</html>
