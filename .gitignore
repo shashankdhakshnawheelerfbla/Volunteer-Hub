@@ -1,0 +1,53 @@
+
+# Dependencies and virtual environments
+.venv/
+venv/
+node_modules/
+
+# Local editor and Cloudflare files
+.vscode/
+.wrangler/
+.cloudflare/
+cloudflare/
+
+# Database backups and local databases
+database-backup-20261027-221402/
+database-new/
+
+# Git and local helper files
+git/
+ai_commit_message.py
+sage.py
+
+# Database test and verification files
+database-test-data.example.sql
+database-verification-report-*
+google-signin-schema.sql
+schema.sql
+social-accounts-schema.sql
+
+# Wrangler configuration backups
+wrangler.json
+wrangler.json.backup-*
+wrangler.json.before-hours-config-fix-*
+wrangler.json.before-hours-db-*
+wrangler.json.repair-*
+
+# Database documentation
+cloudflare/volunteer-db.md
+cloudflare/volunteer-hub-social-accounts.md
+
+# Database schema files
+cloudflare/sql/schema/*.sql
+cloudflare/sql/schema/**/*.sql
+
+# Database test data
+cloudflare/sql/test-data/database-test-data.example.sql
+
+# Other files
+VolunteerHub-Database-Verification-Correc*
+google0b08dede38c9b155.html
+package-lock.json
+package.json
+README.md
+requirements.txt
