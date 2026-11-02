@@ -26,3 +26,6 @@ cloudflare/sql/test-data/database-test-data.example.sql
 cloudflare/sql/schema/*.sql
 cloudflare/sql/schema/**/*.sql
 # Hide local SQL schema files from GitHub
+# Hide Clodflare Folder
+Volunteer-Hub\cloudflare
+# Hide Cludflare Folder
